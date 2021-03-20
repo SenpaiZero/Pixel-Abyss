@@ -41,9 +41,9 @@ techniques about cleaner codes, Global Variables, Saving Data, Shaders, Pixel Ar
 
 ### Built With
 <ul style="text-align: left;">
-<li>[UNITY](https://unity.com/)</li>
-<li>[ASEPRITE](https://www.aseprite.org/)</li>
-<li>[PHOTOSHOP](https://www.photoshop.com/en)</li>
+<li><a href="https://unity.com/">UNITY</a></li>
+<li><a href="https://www.aseprite.org">ASEPRITE</a></li>
+<li><a href="https://www.photoshop.com/en">PHOTOSHOP</a></li>
 </ul>
 
 
