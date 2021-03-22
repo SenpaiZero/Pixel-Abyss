@@ -12,7 +12,7 @@ public class VariablesScript : MonoBehaviour
 
     //magic Variables
     private float wandDamage = 10f; 
-    private float attackSpeed = 1.4f; //1.4 1.2 1.0 0.8 .6 .4
+    private float attackSpeed = 0.5f; //1.0 
     private float attackSpeedCount = 1f;
     private float magicSpeed = 10;
     private int wandLevel = 1; //kung ilan lalaban sa fireball
@@ -21,7 +21,7 @@ public class VariablesScript : MonoBehaviour
     private int level = 1;
     private float exp = 0f;
     private float expToLvlUp = 100f;
-    private int skillPoint = 0;
+    private int skillPoint = 5;
 
     //POTS
     private int ManaPots;

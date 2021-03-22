@@ -234,7 +234,9 @@ public class Player : MonoBehaviour
     }
 
 
+    
     //function for shooting magic
+
     public void shoot()
     {
         if (atkTimer >= PlayerPrefs.GetFloat("attackSpeed"))
