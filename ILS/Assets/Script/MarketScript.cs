@@ -21,6 +21,7 @@ public class MarketScript : MonoBehaviour
         {
             PlayerPrefs.SetInt("hpPots", PlayerPrefs.GetInt("hpPots") + 1);
             PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") - 20);
+            menuSFX();
             PlayerPrefs.Save();
         }
     }
@@ -31,7 +32,13 @@ public class MarketScript : MonoBehaviour
         {
             PlayerPrefs.SetInt("manaPots", PlayerPrefs.GetInt("manaPots") + 1);
             PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") - 20);
+            menuSFX();
             PlayerPrefs.Save();
         }
+    }
+
+    void menuSFX()
+    {
+        GameObject.FindGameObjectWithTag("MenuSfx").GetComponent<menuSFX>().menuSound();
     }
 }

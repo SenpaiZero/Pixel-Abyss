@@ -83,6 +83,7 @@ public class Enemy : MonoBehaviour
 
         if(PlayerPrefs.GetFloat("EXP") >= PlayerPrefs.GetFloat("ExpToLevelUp"))
         {
+            GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().levelUp();
             //levelup
             Debug.Log("LevelUp");
             PlayerPrefs.SetInt("Level", PlayerPrefs.GetInt("Level") + 1);

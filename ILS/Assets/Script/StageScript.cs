@@ -16,6 +16,7 @@ public class StageScript : MonoBehaviour
     public void stageBtn()
     {
         trans.GetComponent<Transition>().loadTransition("Stage " + stageNumber);
+        GameObject.FindGameObjectWithTag("MenuSfx").GetComponent<menuSFX>().menuSound();
     }
 
 }

@@ -95,10 +95,13 @@ public class statusScript : MonoBehaviour
     {
         PlayerPrefs.SetFloat("EXP", PlayerPrefs.GetFloat("EXP") + 50);
         PlayerPrefs.Save();
+            sfxMenu();
 
         if (PlayerPrefs.GetFloat("EXP") >= PlayerPrefs.GetFloat("ExpToLevelUp"))
         {
             //levelup
+            GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().levelUp();
+
             Debug.Log("LevelUp");
             PlayerPrefs.SetInt("Level", PlayerPrefs.GetInt("Level") + 1);
             PlayerPrefs.SetInt("skillPoints", PlayerPrefs.GetInt("skillPoints") + 1);
@@ -114,12 +117,14 @@ public class statusScript : MonoBehaviour
     {
         PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") + 50);
         PlayerPrefs.Save();
+        sfxMenu();
     }
 
     public void cheatDmg()
     {
         PlayerPrefs.SetFloat("wandDamage", PlayerPrefs.GetFloat("wandDamage") + 5);
         PlayerPrefs.Save();
+        sfxMenu();
     }
 
     public void cheatHP()
@@ -127,15 +132,18 @@ public class statusScript : MonoBehaviour
 
         PlayerPrefs.SetFloat("health", PlayerPrefs.GetFloat("health") + 10);
         PlayerPrefs.Save();
+        sfxMenu();
     }
     public void cheatMana()
     {
+        sfxMenu();
         PlayerPrefs.SetFloat("mana", PlayerPrefs.GetFloat("mana") + 10);
         PlayerPrefs.Save();
     }
 
     public void resetStat()
     {
+        sfxMenu();
         //reset EXP
         PlayerPrefs.SetFloat("EXP", 0);
         PlayerPrefs.SetFloat("ExpToLevelUp", 100);
@@ -156,11 +164,19 @@ public class statusScript : MonoBehaviour
 
     public void closeCheatObj()
     {
+        sfxMenu();
         cheatObj.SetActive(false);
     }
 
     public void openCheatObj()
     {
+        sfxMenu();
         cheatObj.SetActive(true);
+    }
+
+    void sfxMenu()
+    {
+
+        GameObject.FindGameObjectWithTag("MenuSfx").GetComponent<menuSFX>().menuSound();
     }
 }

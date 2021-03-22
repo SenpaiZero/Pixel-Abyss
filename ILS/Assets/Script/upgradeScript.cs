@@ -37,6 +37,7 @@ public class upgradeScript : MonoBehaviour
     {
         if(PlayerPrefs.GetInt("skillPoints") >= 1)
         {
+            sfxMenu();
             PlayerPrefs.SetFloat("health", PlayerPrefs.GetFloat("health") + 10);
             PlayerPrefs.SetInt("skillPoints", PlayerPrefs.GetInt("skillPoints") - 1);
             PlayerPrefs.Save();
@@ -48,6 +49,7 @@ public class upgradeScript : MonoBehaviour
     {
         if (PlayerPrefs.GetInt("skillPoints") >= 1)
         {
+            sfxMenu();
             PlayerPrefs.SetFloat("mana", PlayerPrefs.GetFloat("mana") + 10);
             PlayerPrefs.SetInt("skillPoints", PlayerPrefs.GetInt("skillPoints") - 1);
             PlayerPrefs.Save();
@@ -59,6 +61,7 @@ public class upgradeScript : MonoBehaviour
     {
         if (PlayerPrefs.GetInt("skillPoints") >= 1)
         {
+            sfxMenu();
             PlayerPrefs.SetFloat("wandDamage", PlayerPrefs.GetFloat("wandDamage") + 5);
             PlayerPrefs.SetInt("skillPoints", PlayerPrefs.GetInt("skillPoints") - 1);
             PlayerPrefs.Save();
@@ -72,6 +75,7 @@ public class upgradeScript : MonoBehaviour
         {
             if (PlayerPrefs.GetInt("skillPoints") >= 1)
             {
+                sfxMenu();
                 PlayerPrefs.SetFloat("attackSpeed", PlayerPrefs.GetFloat("attackSpeed") - 0.2f);
                 PlayerPrefs.SetFloat("atkSpdCount", PlayerPrefs.GetFloat("atkSpdCount") + 1);
                 PlayerPrefs.SetInt("skillPoints", PlayerPrefs.GetInt("skillPoints") - 1);
@@ -87,6 +91,7 @@ public class upgradeScript : MonoBehaviour
         {
             if (PlayerPrefs.GetInt("skillPoints") >= 1)
             {
+                sfxMenu();
                 PlayerPrefs.SetFloat("healthRegen", PlayerPrefs.GetFloat("healthRegen") + 1);
                 PlayerPrefs.SetInt("skillPoints", PlayerPrefs.GetInt("skillPoints") - 1);
                 PlayerPrefs.Save();
@@ -101,6 +106,7 @@ public class upgradeScript : MonoBehaviour
         {
             if (PlayerPrefs.GetInt("skillPoints") >= 1)
             {
+                sfxMenu();
                 PlayerPrefs.SetFloat("manaRegen", PlayerPrefs.GetFloat("manaRegen") + 1);
                 PlayerPrefs.SetInt("skillPoints", PlayerPrefs.GetInt("skillPoints") - 1);
                 PlayerPrefs.Save();
@@ -110,7 +116,12 @@ public class upgradeScript : MonoBehaviour
 
     public void upgradeClose()
     {
+        sfxMenu();
         upgrade.SetActive(false);
     }
 
+    void sfxMenu()
+    {
+        GameObject.FindGameObjectWithTag("MenuSfx").GetComponent<menuSFX>().menuSound();
+    }
 }

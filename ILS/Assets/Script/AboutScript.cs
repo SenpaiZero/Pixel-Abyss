@@ -9,10 +9,12 @@ public class AboutScript : MonoBehaviour
     public void closeAbout()
     {
         aboutObj.SetActive(false);
+        GameObject.FindGameObjectWithTag("MenuSfx").GetComponent<menuSFX>().menuSound();
     }
 
     public void openAbout()
     {
         aboutObj.SetActive(true);
+        GameObject.FindGameObjectWithTag("MenuSfx").GetComponent<menuSFX>().menuSound();
     }
 }

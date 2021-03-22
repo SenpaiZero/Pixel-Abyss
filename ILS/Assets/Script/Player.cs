@@ -14,6 +14,7 @@ public class Player : MonoBehaviour
     [SerializeField] private CapsuleCollider2D skillCollider;
     [SerializeField] AudioSource tpSFX;
     [SerializeField] AudioSource shootSFX;
+    public GameObject prefabTornado;
 
     [Header("Player")]
     [SerializeField] private GameObject textPopup;
@@ -23,6 +24,8 @@ public class Player : MonoBehaviour
     [SerializeField] private SpriteRenderer sr;
     [SerializeField] private ParticleSystem particle;
     private Collider2D col;
+    [SerializeField] ParticleSystem lvlUp;
+    [SerializeField] AudioSource levelUpSFX;
 
     [Header("Attack Variables")]
     public GameObject aimRot;
@@ -34,6 +37,7 @@ public class Player : MonoBehaviour
     private GameObject animTP;
     private GameObject skillChild;
 
+    
     private bool isTeleportCD = false;
     private bool isTornadoCD = false;
     private float angle;
@@ -54,6 +58,9 @@ public class Player : MonoBehaviour
     }
     private void Start()
     {
+        var particleEmission = lvlUp.emission;
+        particleEmission.enabled = false;
+
         speed = PlayerPrefs.GetFloat("movementSpeed");
         health = PlayerPrefs.GetFloat("health");
         mana = PlayerPrefs.GetFloat("mana");
@@ -183,7 +190,7 @@ public class Player : MonoBehaviour
         if (variableJoystick.Horizontal <= -0.4f || variableJoystick.Vertical <= -0.4f ||
             variableJoystick.Horizontal >= 0.4f || variableJoystick.Vertical >= 0.4f)
         {
-            if (isTeleporting == true || isTornado == true)
+            if (isTeleporting == true)
             {
                 rb.velocity = Vector3.zero;
             }
@@ -213,7 +220,7 @@ public class Player : MonoBehaviour
         //animation
         if (Mathf.Abs(rb.velocity.x) > 0 || Mathf.Abs(rb.velocity.y) > 0)
         {
-            if (isTeleporting != true || isTornado != true)
+            if (isTeleporting != true)
             {
                 anim.Play("Walking");
             }
@@ -254,6 +261,9 @@ public class Player : MonoBehaviour
         clone.GetComponentInChildren<TextMeshPro>().color = Color.red;
         clone.transform.parent = transform.parent;
         Destroy(clone, 3f);
+
+        damageIndic();
+
         if (health <= 0)
         {
             dead();
@@ -347,6 +357,29 @@ public class Player : MonoBehaviour
         }
     }
 
+    public void levelUp()
+    {
+        StartCoroutine("lvlUpDelay");
+    }
+
+    IEnumerator lvlUpDelay()
+    {
+        var particleEmission = lvlUp.emission;
+        particleEmission.enabled = true;
+        lvlUp.Play();
+        levelUpSFX.Play();
+
+        yield return new WaitForSeconds(2f);
+        particleEmission.enabled = false;
+    }
+
+    //Red dmg when hit
+    private void damageIndic()
+    {
+        Animator dmgIndicAnim = GameObject.FindGameObjectWithTag("DamageIndicator").GetComponent<Animator>();
+        dmgIndicAnim.Play("dmgIndicV1");
+    }
+
     //Add delay on finding if every enemy is dead
     IEnumerator enemyAllDead()
     {
@@ -381,22 +414,19 @@ public class Player : MonoBehaviour
     IEnumerator playerSkill()
     {
         mana -= 50f;
-        isTornado = true;
-        skillChild.GetComponent<Animator>().Play("Wave Attack v1");
-        skillCollider.enabled = true;
-        Debug.Log("Skill Collider is enabled");
+        GameObject clone = Instantiate(prefabTornado, aimRot.transform.position, Quaternion.identity);
+        Rigidbody2D crb1 = clone.GetComponent<Rigidbody2D>();
+        crb1.AddForce(aimPos.right * 3f, ForceMode2D.Impulse);
+        crb1.velocity = Vector2.ClampMagnitude(crb1.velocity, 3f);
+        Destroy(clone, 10f);
 
-        yield return new WaitForSeconds(3f);
-        isTornado = false;
-        skillChild.GetComponent<Animator>().Play("New State");
-        skillCollider.enabled = false;
-        Debug.Log("Skill Collider is disabled");
+        yield return null;
     }
 
     IEnumerator skillCDTornado()
     {
         isTornadoCD = true;
-        yield return new WaitForSeconds(10f);
+        yield return new WaitForSeconds(5f);
         isTornadoCD = false;
     }
 

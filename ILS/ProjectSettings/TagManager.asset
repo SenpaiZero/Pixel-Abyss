@@ -13,6 +13,8 @@ TagManager:
   - Coin
   - GameManager
   - PlayerParent
+  - DamageIndicator
+  - MenuSfx
   layers:
   - Default
   - TransparentFX

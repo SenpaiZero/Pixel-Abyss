@@ -5,6 +5,9 @@ using UnityEngine;
 public class CoinScript : MonoBehaviour
 {
     private int rand;
+    public AudioSource sfx;
+    public SpriteRenderer sp;
+    public CircleCollider2D cr;
     private void Start()
     {
         rand = Random.Range(1, 5);
@@ -13,10 +16,15 @@ public class CoinScript : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player")
         {
+
+            sfx.Play();
+            sp.enabled = false;
+            cr.enabled = false;
             collision.gameObject.GetComponent<Player>().coinPickup(rand);
             PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") + rand);
             PlayerPrefs.Save();
-            Destroy(gameObject);
+
+            Destroy(gameObject, 3f);
         }
     }
 }
