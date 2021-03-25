@@ -66,6 +66,17 @@ public class VariablesScript : MonoBehaviour
             PlayerPrefs.SetInt("manaPots", ManaPots);
             PlayerPrefs.Save();
 
+            //MENU
+            PlayerPrefs.SetInt("isDamageInd", 0);
+            PlayerPrefs.SetInt("isCheat", 0);
+            PlayerPrefs.SetInt("isShake", 0);
+            PlayerPrefs.SetInt("isMana", 0);
+            PlayerPrefs.SetInt("isHealth", 0);
+            PlayerPrefs.SetInt("isDamage", 0);
+
+            PlayerPrefs.SetFloat("musicValue", 50);
+            PlayerPrefs.SetFloat("sfxValue", 50);
+
             //saving first run
             PlayerPrefs.SetInt("firstRun", firstRun + 5);
             PlayerPrefs.Save();

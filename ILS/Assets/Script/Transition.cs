@@ -7,17 +7,21 @@ public class Transition : MonoBehaviour
 {
     public Animator transitionAnim;
     private float transitionTime = 2f;
-
+    private AudioSource musicThisScene;
     private void Awake()
     {
         QualitySettings.vSyncCount = 0;
         Application.targetFrameRate = 30;
     }
-
+    private void Start()
+    {
+        musicThisScene = GetComponent<AudioSource>();
+    }
     void Update()
     {
+        musicThisScene.volume = (PlayerPrefs.GetFloat("musicValue")/100);
         //Debug
-        if(Input.GetKeyDown(KeyCode.Q))
+        if (Input.GetKeyDown(KeyCode.Q))
         {
             loadTransition("Base");
         }

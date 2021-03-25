@@ -32,6 +32,7 @@ public class statusScript : MonoBehaviour
 
     [Header("CHEAT")]
     public GameObject cheatObj;
+    private GameObject cheatBtn;
     
     private void Start()
     {
@@ -50,11 +51,16 @@ public class statusScript : MonoBehaviour
         //Coins
         coins = PlayerPrefs.GetInt("Coins");
 
-
     }
 
     private void Update()
     {
+        if(PlayerPrefs.GetInt("isCheat") == 1)
+        {
+            cheatBtn = GameObject.FindGameObjectWithTag("cheatBtn");
+            cheatBtn.SetActive(false);
+        }
+
         //-----GET VARIABLES-----
         //Health
         MaxHealth = PlayerPrefs.GetFloat("health");

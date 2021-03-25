@@ -33,11 +33,14 @@ public class Enemy : MonoBehaviour
     public void takeDamage(float ammount)
     {
         enemyHP -= ammount;
-        GameObject clone = Instantiate(dmgTextObj, textPos.position, Quaternion.identity);
-        clone.GetComponentInChildren<TextMeshPro>().text = "" + ammount.ToString("F0");
-        clone.transform.parent = transform.parent;
-        Destroy(clone, 3f);
-        Debug.Log("Text Enemy Damage Instantiated");
+        if (PlayerPrefs.GetInt("isDamage") == 0)
+        {
+            GameObject clone = Instantiate(dmgTextObj, textPos.position, Quaternion.identity);
+            clone.GetComponentInChildren<TextMeshPro>().text = "" + ammount.ToString("F0");
+            clone.transform.parent = transform.parent;
+            Destroy(clone, 3f);
+            Debug.Log("Text Enemy Damage Instantiated");
+        }
 
 
         if(enemyHP <= 0)

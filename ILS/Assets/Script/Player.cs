@@ -77,6 +77,10 @@ public class Player : MonoBehaviour
     }
     private void Update()
     {
+        tpSFX.volume = (PlayerPrefs.GetFloat("sfxValue") / 100);
+        shootSFX.volume = (PlayerPrefs.GetFloat("sfxValue") / 100);
+        levelUpSFX.volume = (PlayerPrefs.GetFloat("sfxValue") / 100);
+
         transform.parent.position = transform.position - transform.localPosition;
 
         //debug
@@ -258,13 +262,14 @@ public class Player : MonoBehaviour
     public void playerTakeDamage(float ammount)
     {
         health -= ammount;
-        GameObject clone = Instantiate(textPopup, new Vector2(transform.position.x, transform.position.y + 2), Quaternion.identity);
-        clone.GetComponentInChildren<TextMeshPro>().text = "" + ammount.ToString("F0");
-        clone.GetComponentInChildren<TextMeshPro>().color = Color.red;
-        clone.transform.parent = transform.parent;
-        Destroy(clone, 3f);
-
-        damageIndic();
+        if (PlayerPrefs.GetInt("isDamageInd") == 0)
+        {
+            GameObject clone = Instantiate(textPopup, new Vector2(transform.position.x, transform.position.y + 2), Quaternion.identity);
+            clone.GetComponentInChildren<TextMeshPro>().text = "" + ammount.ToString("F0");
+            clone.GetComponentInChildren<TextMeshPro>().color = Color.red;
+            clone.transform.parent = transform.parent;
+            Destroy(clone, 3f);
+        }
 
         if (health <= 0)
         {
@@ -275,21 +280,27 @@ public class Player : MonoBehaviour
     public void playerRestoreHP(float hpPots)
     {
         health += hpPots;
-        GameObject clone = Instantiate(textPopup, new Vector2(transform.position.x, transform.position.y + 2), Quaternion.identity);
-        clone.GetComponentInChildren<TextMeshPro>().text = "" + hpPots.ToString("F0");
-        clone.GetComponentInChildren<TextMeshPro>().color = Color.green;
-        clone.transform.parent = transform.parent;
-        Destroy(clone, 3f);
+        if (PlayerPrefs.GetInt("isHealth") == 0)
+        {
+            GameObject clone = Instantiate(textPopup, new Vector2(transform.position.x, transform.position.y + 2), Quaternion.identity);
+            clone.GetComponentInChildren<TextMeshPro>().text = "" + hpPots.ToString("F0");
+            clone.GetComponentInChildren<TextMeshPro>().color = Color.green;
+            clone.transform.parent = transform.parent;
+            Destroy(clone, 3f);
+        }
     }
 
     public void playerRestoreMana(float manaPots)
     {
         mana += manaPots;
-        GameObject clone = Instantiate(textPopup, new Vector2(transform.position.x, transform.position.y + 2), Quaternion.identity);
-        clone.GetComponentInChildren<TextMeshPro>().text = "" + manaPots.ToString("F0");
-        clone.GetComponentInChildren<TextMeshPro>().color = Color.blue;
-        clone.transform.parent = transform.parent;
-        Destroy(clone, 3f);
+        if (PlayerPrefs.GetInt("isMana") == 0)
+        {
+            GameObject clone = Instantiate(textPopup, new Vector2(transform.position.x, transform.position.y + 2), Quaternion.identity);
+            clone.GetComponentInChildren<TextMeshPro>().text = "" + manaPots.ToString("F0");
+            clone.GetComponentInChildren<TextMeshPro>().color = Color.blue;
+            clone.transform.parent = transform.parent;
+            Destroy(clone, 3f);
+        }
     }
 
     public void coinPickup(int coinsCount)
@@ -375,12 +386,6 @@ public class Player : MonoBehaviour
         particleEmission.enabled = false;
     }
 
-    //Red dmg when hit
-    private void damageIndic()
-    {
-        Animator dmgIndicAnim = GameObject.FindGameObjectWithTag("DamageIndicator").GetComponent<Animator>();
-        dmgIndicAnim.Play("dmgIndicV1");
-    }
 
     //Add delay on finding if every enemy is dead
     IEnumerator enemyAllDead()

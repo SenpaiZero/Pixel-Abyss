@@ -10,5 +10,6 @@ public class menuSFX : MonoBehaviour
     public void menuSound()
     {
         sfx.PlayOneShot(AC);
+        sfx.volume = (PlayerPrefs.GetFloat("sfxValue") / 100);
     }
 }

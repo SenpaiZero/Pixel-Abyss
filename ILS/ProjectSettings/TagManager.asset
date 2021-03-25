@@ -15,6 +15,7 @@ TagManager:
   - PlayerParent
   - DamageIndicator
   - MenuSfx
+  - cheatBtn
   layers:
   - Default
   - TransparentFX

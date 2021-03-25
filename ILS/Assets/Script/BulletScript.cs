@@ -13,12 +13,21 @@ public class BulletScript : MonoBehaviour
         wandDamage = PlayerPrefs.GetFloat("wandDamage");
         hitSFX = GameObject.FindGameObjectWithTag("PlayerParent").GetComponent<AudioSource>();
     }
+
+    private void Update()
+    {
+        hitSFX.volume = (PlayerPrefs.GetFloat("sfxValue") / 100);
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
 
         GameObject clone = Instantiate(explosionPrefab, transform.position, Quaternion.identity);
-        GameObject cam = GameObject.FindGameObjectWithTag("MainCamera");
-        cam.GetComponent<Animator>().Play("CamShake");
+        if (PlayerPrefs.GetInt("isShake") == 0)
+        {
+            GameObject cam = GameObject.FindGameObjectWithTag("MainCamera");
+            cam.GetComponent<Animator>().Play("CamShake");
+        }
         hitSFX.Play();
 
         if (collision.gameObject.tag == "Enemy")
