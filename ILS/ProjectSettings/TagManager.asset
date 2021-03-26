@@ -16,6 +16,7 @@ TagManager:
   - DamageIndicator
   - MenuSfx
   - cheatBtn
+  - ImmovableObj
   layers:
   - Default
   - TransparentFX
