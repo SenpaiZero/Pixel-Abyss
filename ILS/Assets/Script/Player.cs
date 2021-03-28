@@ -407,6 +407,7 @@ public class Player : MonoBehaviour
         anim.Play("TP animation V2");
         animTP.GetComponent<Animator>().Play("tp new v3");
         Physics2D.IgnoreLayerCollision(15, 8, true);
+        Physics2D.IgnoreLayerCollision(15, 20, true);
 
         yield return new WaitForSeconds(0.400f);
 
@@ -415,6 +416,7 @@ public class Player : MonoBehaviour
 
         yield return new WaitForSeconds(0.200f);
         Physics2D.IgnoreLayerCollision(15, 8, false);
+        Physics2D.IgnoreLayerCollision(15, 20, false);
         isTeleporting = false;
     }
 

@@ -17,6 +17,7 @@ TagManager:
   - MenuSfx
   - cheatBtn
   - ImmovableObj
+  - Computer
   layers:
   - Default
   - TransparentFX
@@ -38,7 +39,7 @@ TagManager:
   - Trap
   - Volume
   - Coins
-  - 
+  - TeleportObj
   - 
   - 
   - 
