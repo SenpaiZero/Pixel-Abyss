@@ -16,7 +16,6 @@ public class UIscript : MonoBehaviour
         btnBot.GetComponent<Image>().alphaHitTestMinimumThreshold = 0.1f;
         btnMid.GetComponent<Image>().alphaHitTestMinimumThreshold = 0.1f;
         btnTop.GetComponent<Image>().alphaHitTestMinimumThreshold = 0.1f;
-        this.GetComponent<Image>().alphaHitTestMinimumThreshold = 0.1f;
     }
 
 }

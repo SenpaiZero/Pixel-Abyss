@@ -18,6 +18,7 @@ TagManager:
   - cheatBtn
   - ImmovableObj
   - Computer
+  - deadCanvas
   layers:
   - Default
   - TransparentFX

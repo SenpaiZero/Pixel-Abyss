@@ -6,6 +6,9 @@ using TMPro;
 
 public class Player : MonoBehaviour
 {
+    [HideInInspector]public int lostCoins;
+    [HideInInspector] public float lostExp;
+
     [Header("Skills")]
     private float speed;
     public float dashSpeed = 2f;
@@ -17,6 +20,8 @@ public class Player : MonoBehaviour
     public GameObject prefabTornado;
 
     [Header("Player")]
+    private GameObject deadCanvas;
+    [SerializeField] private ParticleSystem footStep;
     [SerializeField] private GameObject textPopup;
     [SerializeField] private Joystick variableJoystick;
     [SerializeField] private Rigidbody2D rb;
@@ -37,7 +42,8 @@ public class Player : MonoBehaviour
     private GameObject animTP;
     private GameObject skillChild;
 
-    
+    bool isDead2 = false;
+    private bool isFootStep = false;
     private bool isTeleportCD = false;
     private bool isTornadoCD = false;
     private float angle;
@@ -83,6 +89,13 @@ public class Player : MonoBehaviour
 
         transform.parent.position = transform.position - transform.localPosition;
 
+        if (rb.velocity.magnitude != 0)
+        {
+            if (isFootStep == false)
+            {
+                StartCoroutine("footStepFunc");
+            }
+        }
         //debug
         if(Input.GetKeyDown(KeyCode.Space))
         {
@@ -96,7 +109,13 @@ public class Player : MonoBehaviour
         {
             shoot();
         }
+        if(Input.GetKeyDown(KeyCode.Return))
+        {
+            health -= 10;
+        }
 
+        lostCoins = PlayerPrefs.GetInt("Coins") / 5;
+        lostExp = PlayerPrefs.GetFloat("EXP") / 5;
 
         //ATTACK SPEED. ATK TIMER
         atkTimer += Time.deltaTime;
@@ -331,6 +350,15 @@ public class Player : MonoBehaviour
     //dead function
     private void dead()
     {
+        if (isDead2 == false)
+        {
+            deadCanvas = GameObject.FindGameObjectWithTag("deadCanvas");
+            deadCanvas.GetComponent<Animator>().Play("DeadAnim");
+
+            PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") - lostCoins);
+            PlayerPrefs.SetFloat("EXP", PlayerPrefs.GetFloat("EXP") - lostExp);
+            isDead2 = true;
+        }
 
     }
 
@@ -397,6 +425,14 @@ public class Player : MonoBehaviour
             Debug.Log("All of the enemy is dead");
             isAllEnemyDead = true;
         }
+    }
+
+    IEnumerator footStepFunc()
+    {
+        footStep.Play();
+        isFootStep = true;
+        yield return new WaitForSeconds(1.5f);
+        isFootStep = false;
     }
 
     IEnumerator playerDash()

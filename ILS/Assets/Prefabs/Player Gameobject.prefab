@@ -348,13 +348,13 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5309816819409963857}
   serializedVersion: 6
-  lengthInSec: 2
+  lengthInSec: 1
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 0
   useUnscaledTime: 0
@@ -423,7 +423,7 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 0
-      scalar: 2
+      scalar: 1
       minScalar: 5
       maxCurve:
         serializedVersion: 2
@@ -1173,8 +1173,8 @@ ParticleSystem:
     rateOverTime:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 10
-      minScalar: 5
+      scalar: 4
+      minScalar: 2
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -1846,7 +1846,7 @@ ParticleSystem:
     uvChannelMask: -1
     rowMode: 1
     sprites:
-    - sprite: {fileID: 8318777905278767044, guid: 54b1b522f65261841a14a0db5fa3ac20,
+    - sprite: {fileID: 1436023349603912658, guid: 54b1b522f65261841a14a0db5fa3ac20,
         type: 3}
     flipU: 0
     flipV: 0
@@ -5077,6 +5077,7 @@ MonoBehaviour:
   shootSFX: {fileID: 5062576127420203998}
   prefabTornado: {fileID: 3908772514783922414, guid: 15559971a429c334994234dafcd2896a,
     type: 3}
+  footStep: {fileID: 3824076279303515789}
   textPopup: {fileID: 3068462681592775180, guid: f44c846c5fb637d49bbe5e7724dca8ee,
     type: 3}
   variableJoystick: {fileID: 0}
