@@ -21,6 +21,7 @@ public class Player : MonoBehaviour
 
     [Header("Player")]
     private GameObject deadCanvas;
+    [SerializeField] private Animator lvlUpCanvas;
     [SerializeField] private ParticleSystem footStep;
     [SerializeField] private GameObject textPopup;
     [SerializeField] private Joystick variableJoystick;
@@ -66,6 +67,7 @@ public class Player : MonoBehaviour
     {
         var particleEmission = lvlUp.emission;
         particleEmission.enabled = false;
+
 
         speed = PlayerPrefs.GetFloat("movementSpeed");
         health = PlayerPrefs.GetFloat("health");
@@ -409,6 +411,7 @@ public class Player : MonoBehaviour
         particleEmission.enabled = true;
         lvlUp.Play();
         levelUpSFX.Play();
+        lvlUpCanvas.Play("LevelUpCanvas");
 
         yield return new WaitForSeconds(2f);
         particleEmission.enabled = false;
@@ -461,8 +464,8 @@ public class Player : MonoBehaviour
         mana -= 50f;
         GameObject clone = Instantiate(prefabTornado, aimRot.transform.position, Quaternion.identity);
         Rigidbody2D crb1 = clone.GetComponent<Rigidbody2D>();
-        crb1.AddForce(aimPos.right * 3f, ForceMode2D.Impulse);
-        crb1.velocity = Vector2.ClampMagnitude(crb1.velocity, 3f);
+        crb1.AddForce(aimPos.right * 2f, ForceMode2D.Impulse);
+        crb1.velocity = Vector2.ClampMagnitude(crb1.velocity, 2f);
         Destroy(clone, 10f);
 
         yield return null;

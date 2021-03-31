@@ -6,115 +6,133 @@ using UnityEngine.UI;
 
 public class upgradeScript : MonoBehaviour
 {
-    //STATS
-    public TextMeshProUGUI maxHp;
-    public TextMeshProUGUI maxMana;
-    public TextMeshProUGUI regenMana;
-    public TextMeshProUGUI regenHP;
-    public TextMeshProUGUI dmg;
-    public TextMeshProUGUI atkSpd;
+    int infoNumber; //0-2 Power
+                    //3-5 Magic
+                    //6-8 Vitality
+                    //9-11 haste
+                    //12-14 greed
+    string[] infoArr = new string[14];
+    int skillPoints;
+    
 
-    public TextMeshProUGUI skillPts;
+    [SerializeField]private GameObject upgradeObj;
+    [Space]
+    [Header("Text")]
+    [SerializeField] private TextMeshProUGUI skillPointsTxt;
 
     [Space]
-    public GameObject upgrade;
+    [SerializeField] private TextMeshProUGUI MainInfoText;
+    [SerializeField] private TextMeshProUGUI PowerInfoText;
+    [SerializeField] private TextMeshProUGUI MagicInfoText;
+    [SerializeField] private TextMeshProUGUI VitalityInfoText;
+    [SerializeField] private TextMeshProUGUI HasteInfoText;
+    [SerializeField] private TextMeshProUGUI GreedInfoText;
 
+    [Space]
+    [SerializeField] private TextMeshProUGUI powerLevelTxt;
+    [SerializeField] private TextMeshProUGUI magicLevelTxt;
+    [SerializeField] private TextMeshProUGUI hasteLevelTxt;
+    [SerializeField] private TextMeshProUGUI greedLevelTxt;
+    [SerializeField] private TextMeshProUGUI vitalityLevelTxt;
+
+
+    private void Start()
+    {
+        //power
+        infoArr[0] = "";
+        infoArr[1] = "";
+        infoArr[2] = "";
+        //magic
+        infoArr[3] = "";
+        infoArr[4] = "";
+        infoArr[5] = "";
+        //vitality
+        infoArr[6] = "";
+        infoArr[7] = "";
+        infoArr[8] = "";
+        //haste
+        infoArr[9] = "";
+        infoArr[10] = "";
+        infoArr[11] = "";
+        //greed
+        infoArr[12] = "";
+        infoArr[13] = "";
+        infoArr[14] = "";
+    }
 
     private void Update()
     {
-        maxHp.text = "MAX HEALTH: " + PlayerPrefs.GetFloat("health");
-        maxMana.text = "MAX MANA: " + PlayerPrefs.GetFloat("mana");
-        regenMana.text = "MANA REGEN PER SEC: " + PlayerPrefs.GetFloat("manaRegen");
-        regenHP.text = "HEALTH REGEN PER SEC: " + PlayerPrefs.GetFloat("healthRegen");
-        dmg.text = "DAMAGE: " + PlayerPrefs.GetFloat("wandDamage");
-        atkSpd.text = "ATTACK SPEED: " + PlayerPrefs.GetFloat("atkSpdCount");
-        skillPts.text = "SKILL POINTS: " + PlayerPrefs.GetInt("skillPoints");
-    }
+        skillPoints = PlayerPrefs.GetInt("skillPoints");
+        skillPointsTxt.text = "" + skillPoints;
 
+        powerLevelTxt.text = "POWER<size=250>\n" + PlayerPrefs.GetInt("powerLevel") + " </size>";
+        magicLevelTxt.text = "MAGIC<size=250>\n" + PlayerPrefs.GetInt("magicLevel") + " </size>";
+        hasteLevelTxt.text = "HASTE<size=250>\n" + PlayerPrefs.GetInt("hasteLevel") + " </size>";
+        vitalityLevelTxt.text = "VITALITY<size=250>\n" + PlayerPrefs.GetInt("vitalityLevel") + " </size>";
+        greedLevelTxt.text = "GREED<size=250>\n" + PlayerPrefs.GetInt("greedLevel") + " </size>";
 
-    //Max HP
-    public void maxHpUpgrade()
-    {
-        if(PlayerPrefs.GetInt("skillPoints") >= 1)
+        switch(infoNumber)
         {
-            sfxMenu();
-            PlayerPrefs.SetFloat("health", PlayerPrefs.GetFloat("health") + 10);
-            PlayerPrefs.SetInt("skillPoints", PlayerPrefs.GetInt("skillPoints") - 1);
-            PlayerPrefs.SetInt("skillSpent", PlayerPrefs.GetInt("skillSpent") + 1);
-            PlayerPrefs.Save();
+            case 0:
+                MainInfoText.text = infoArr[infoNumber];
+                break;
+            case 1:
+                MainInfoText.text = infoArr[infoNumber];
+                break;
+            case 2:
+                MainInfoText.text = infoArr[infoNumber];
+                break;
+            case 3:
+                MainInfoText.text = infoArr[infoNumber];
+                break;
+            case 4:
+                MainInfoText.text = infoArr[infoNumber];
+                break;
+            case 5:
+                MainInfoText.text = infoArr[infoNumber];
+                break;
+            case 6:
+                MainInfoText.text = infoArr[infoNumber];
+                break;
+            case 7:
+                MainInfoText.text = infoArr[infoNumber];
+                break;
+            case 8:
+                MainInfoText.text = infoArr[infoNumber];
+                break;
+            case 9:
+                MainInfoText.text = infoArr[infoNumber];
+                break;
+            case 10:
+                MainInfoText.text = infoArr[infoNumber];
+                break;
+            case 11:
+                MainInfoText.text = infoArr[infoNumber];
+                break;
+            case 12:
+                MainInfoText.text = infoArr[infoNumber];
+                break;
+            case 13:
+                MainInfoText.text = infoArr[infoNumber];
+                break;
+            case 14:
+                MainInfoText.text = infoArr[infoNumber];
+                break;
+
         }
     }
 
-    //MAX MANA
-    public void maxManaUpgrade()
+    public void upgradePower()
     {
-        if (PlayerPrefs.GetInt("skillPoints") >= 1)
+        if (PlayerPrefs.GetInt("powerLevel") < 15)
         {
-            sfxMenu();
-            PlayerPrefs.SetFloat("mana", PlayerPrefs.GetFloat("mana") + 10);
-            PlayerPrefs.SetInt("skillPoints", PlayerPrefs.GetInt("skillPoints") - 1);
-            PlayerPrefs.SetInt("skillSpent", PlayerPrefs.GetInt("skillSpent") + 1);
-            PlayerPrefs.Save();
-        }
-    }
-
-    //dmg
-    public void damageUpgrade()
-    {
-        if (PlayerPrefs.GetInt("skillPoints") >= 1)
-        {
-            sfxMenu();
-            PlayerPrefs.SetFloat("wandDamage", PlayerPrefs.GetFloat("wandDamage") + 5);
-            PlayerPrefs.SetInt("skillPoints", PlayerPrefs.GetInt("skillPoints") - 1);
-            PlayerPrefs.SetInt("skillSpent", PlayerPrefs.GetInt("skillSpent") + 1);
-            PlayerPrefs.Save();
-        }
-    }
-
-    //AtkSpd
-    public void attackSpeedUpgrade()
-    {
-        if (PlayerPrefs.GetFloat("attackSpeed") > 0.1)
-        {
-            if (PlayerPrefs.GetInt("skillPoints") >= 1)
+            if (skillPoints >= 1)
             {
                 sfxMenu();
-                PlayerPrefs.SetFloat("attackSpeed", PlayerPrefs.GetFloat("attackSpeed") - 0.1f);
-                PlayerPrefs.SetFloat("atkSpdCount", PlayerPrefs.GetFloat("atkSpdCount") + 1);
-                PlayerPrefs.SetInt("skillSpent", PlayerPrefs.GetInt("skillSpent") + 1);
+                PlayerPrefs.SetFloat("wandDamage", PlayerPrefs.GetFloat("wandDamage") + 5f);
+                PlayerPrefs.SetFloat("critChance", PlayerPrefs.GetFloat("critChance") + 2f);
+                PlayerPrefs.SetInt("powerLevel", PlayerPrefs.GetInt("powerLevel") + 1);
                 PlayerPrefs.SetInt("skillPoints", PlayerPrefs.GetInt("skillPoints") - 1);
-                PlayerPrefs.Save();
-            }
-        }
-    } 
-
-    //Mana Regen
-    public void healthRegenUpgrade()
-    {
-        if (PlayerPrefs.GetFloat("healthRegen") < 5)
-        {
-            if (PlayerPrefs.GetInt("skillPoints") >= 1)
-            {
-                sfxMenu();
-                PlayerPrefs.SetFloat("healthRegen", PlayerPrefs.GetFloat("healthRegen") + 1);
-                PlayerPrefs.SetInt("skillPoints", PlayerPrefs.GetInt("skillPoints") - 1);
-                PlayerPrefs.SetInt("skillSpent", PlayerPrefs.GetInt("skillSpent") + 1);
-                PlayerPrefs.Save();
-            }
-        }
-    }
-
-    //Health Regen
-    public void manaRegenUpgrade()
-    {
-        if (PlayerPrefs.GetFloat("manaRegen") < 5)
-        {
-            if (PlayerPrefs.GetInt("skillPoints") >= 1)
-            {
-                sfxMenu();
-                PlayerPrefs.SetFloat("manaRegen", PlayerPrefs.GetFloat("manaRegen") + 1);
-                PlayerPrefs.SetInt("skillPoints", PlayerPrefs.GetInt("skillPoints") - 1);
-                PlayerPrefs.SetInt("skillSpent", PlayerPrefs.GetInt("skillSpent") + 1);
                 PlayerPrefs.Save();
             }
         }
@@ -123,16 +141,16 @@ public class upgradeScript : MonoBehaviour
     public void upgradeClose()
     {
         sfxMenu();
-        upgrade.SetActive(false);
+        upgradeObj.SetActive(false);
     }
 
     public void ResetSkill()
     {
-
+        sfxMenu();
         PlayerPrefs.SetInt("skillPoints", PlayerPrefs.GetInt("skillPoints") + PlayerPrefs.GetInt("skillSpent"));
         PlayerPrefs.SetInt("skillSpent", 0);
         PlayerPrefs.SetFloat("wandDamage", 10f);
-        PlayerPrefs.SetFloat("attackSpeed", 0.5f);
+        PlayerPrefs.SetFloat("attackSpeed", 1f);
         PlayerPrefs.SetFloat("atkSpdCount", 1);
 
 
@@ -140,6 +158,13 @@ public class upgradeScript : MonoBehaviour
         PlayerPrefs.SetFloat("healthRegen", 1);
         PlayerPrefs.SetFloat("manaRegen", 1);
         PlayerPrefs.SetFloat("mana", 50);
+
+
+        PlayerPrefs.SetInt("powerLevel", 0);
+        PlayerPrefs.SetInt("magicLevel", 0);
+        PlayerPrefs.SetInt("hasteLevel", 0);
+        PlayerPrefs.SetInt("vitalityLevel", 0);
+        PlayerPrefs.SetInt("greedLevel", 0);
     }
 
     void sfxMenu()

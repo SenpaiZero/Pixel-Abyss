@@ -9,10 +9,11 @@ public class VariablesScript : MonoBehaviour
     private float mana = 50f;
     private float healthRegen = 1f;
     private float manaRegen = 1f;
+    private float criticalChance = 5f;
 
     //magic Variables
     private float wandDamage = 10f; 
-    private float attackSpeed = 0.5f; //1.0 
+    private float attackSpeed = 1f; //1.0 
     private float attackSpeedCount = 1f;
     private float magicSpeed = 10;
     private int wandLevel = 1; //kung ilan lalaban sa fireball
@@ -32,6 +33,13 @@ public class VariablesScript : MonoBehaviour
     private float movementSpeed = 6f;
     private int firstRun = 0;
 
+    //upgrade
+    private int powerLevel = 0;
+    private int vitalityLevel = 0;
+    private int magicLevel = 0;
+    private int hasteLevel = 0;
+    private int greedLevel = 0;
+
     void Awake()
     {
         firstRun = PlayerPrefs.GetInt("firstRun");
@@ -45,6 +53,7 @@ public class VariablesScript : MonoBehaviour
             PlayerPrefs.Save();
 
             //Wand
+            PlayerPrefs.SetFloat("critChance", criticalChance);
             PlayerPrefs.SetFloat("wandDamage", wandDamage);
             PlayerPrefs.SetFloat("attackSpeed", attackSpeed);
             PlayerPrefs.SetFloat("atkSpdCount", attackSpeedCount);
@@ -76,6 +85,13 @@ public class VariablesScript : MonoBehaviour
 
             PlayerPrefs.SetFloat("musicValue", 50);
             PlayerPrefs.SetFloat("sfxValue", 50);
+
+            //powerLevel
+            PlayerPrefs.SetInt("powerLevel", powerLevel);
+            PlayerPrefs.SetInt("magicLevel", magicLevel);
+            PlayerPrefs.SetInt("hasteLevel", hasteLevel);
+            PlayerPrefs.SetInt("vitalityLevel", vitalityLevel);
+            PlayerPrefs.SetInt("greedLevel", greedLevel);
 
             //saving first run
             PlayerPrefs.SetInt("firstRun", firstRun + 5);

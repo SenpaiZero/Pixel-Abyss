@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class SkillDamage : MonoBehaviour
 {
-    private float skillTick = 0.5f;
+    private float skillTick = 0.4f;
     private float timer = 0;
     private float skillDmg;
     public float range;
-    public CapsuleCollider2D capsulCol;
+    public CircleCollider2D cirCol;
 
     public LayerMask enemyLayer;
 
@@ -29,7 +29,7 @@ public class SkillDamage : MonoBehaviour
 
 
         Collider2D[] enemyInRange = Physics2D.OverlapCircleAll(transform.position, range, enemyLayer);
-        if (capsulCol.isActiveAndEnabled == true)
+        if (cirCol.isActiveAndEnabled == true)
         {
             if (timer >= skillTick)
             {
