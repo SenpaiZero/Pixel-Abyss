@@ -10,10 +10,11 @@ public class VariablesScript : MonoBehaviour
     private float healthRegen = 1f;
     private float manaRegen = 1f;
     private float criticalChance = 5f;
+    private float cooldownReduc = 0f;
 
     //magic Variables
     private float wandDamage = 10f; 
-    private float attackSpeed = 1f; //1.0 
+    private float attackSpeed = 0.5f; //1.0 
     private float attackSpeedCount = 1f;
     private float magicSpeed = 10;
     private int wandLevel = 1; //kung ilan lalaban sa fireball
@@ -59,6 +60,9 @@ public class VariablesScript : MonoBehaviour
             PlayerPrefs.SetFloat("atkSpdCount", attackSpeedCount);
             PlayerPrefs.SetFloat("magicSpeed", magicSpeed);
             PlayerPrefs.SetInt("wandLevel", wandLevel);
+            PlayerPrefs.SetFloat("cdr", cooldownReduc);
+            PlayerPrefs.SetInt("attackSpeedCounter", 0);
+            PlayerPrefs.SetInt("movementSpeedCounter", 0);
             PlayerPrefs.Save();
 
 
@@ -73,6 +77,10 @@ public class VariablesScript : MonoBehaviour
 
             PlayerPrefs.SetInt("hpPots", HpPots);
             PlayerPrefs.SetInt("manaPots", ManaPots);
+
+            PlayerPrefs.SetFloat("extraCoins", 0);
+            PlayerPrefs.SetFloat("extraEXP", 0);
+
             PlayerPrefs.Save();
 
             //MENU

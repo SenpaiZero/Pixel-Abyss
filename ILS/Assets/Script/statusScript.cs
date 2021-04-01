@@ -113,7 +113,7 @@ public class statusScript : MonoBehaviour
             PlayerPrefs.SetInt("skillPoints", PlayerPrefs.GetInt("skillPoints") + 1);
             PlayerPrefs.Save();
             PlayerPrefs.SetFloat("EXP", 0);
-            PlayerPrefs.SetFloat("ExpToLevelUp", PlayerPrefs.GetFloat("ExpToLevelUp") + (PlayerPrefs.GetFloat("ExpToLevelUp") / 6));
+            PlayerPrefs.SetFloat("ExpToLevelUp", PlayerPrefs.GetFloat("ExpToLevelUp") + (PlayerPrefs.GetFloat("ExpToLevelUp") / 7));
             PlayerPrefs.Save();
             Debug.Log("Level: " + PlayerPrefs.GetInt("Level"));
         }
