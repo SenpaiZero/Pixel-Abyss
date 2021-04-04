@@ -33,6 +33,7 @@ public class ScorpionEnemy : MonoBehaviour
     {
         float Dist = Vector3.Distance(player.transform.position, this.transform.position);
         float alertDis = Dist;
+        timer += Time.deltaTime;
 
         if (alertDis <= alertRange)
         {
@@ -44,16 +45,15 @@ public class ScorpionEnemy : MonoBehaviour
             //attack
             if (Dist <= range)
             {
-                timer+=Time.deltaTime;
                 if (timer >= attackTimer)
                 {
 
                     Vector3 dir = player.transform.position - transform.position;
                     float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90;
                     bulletPos.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
-                    bulletPos2.rotation = Quaternion.AngleAxis(angle - 90, Vector3.forward);
-                    bulletPos3.rotation = Quaternion.AngleAxis(angle + 90, Vector3.forward);
-                    attack();
+                    bulletPos2.rotation = Quaternion.AngleAxis(angle - 35, Vector3.forward);
+                    bulletPos3.rotation = Quaternion.AngleAxis(angle + 35, Vector3.forward);
+                    StartCoroutine("delayAttack");
 
                     agent.SetDestination(-player.transform.position);
                     timer = 0;
@@ -77,9 +77,16 @@ public class ScorpionEnemy : MonoBehaviour
         }
     }
 
+    IEnumerator delayAttack()
+    {
+        attack();
+        yield return new WaitForSeconds(0.2f);
+        attack();
+        yield return new WaitForSeconds(0.2f);
+        attack();
+    }
     void attack()
     {
-        timer = 0;
         //bullet 1
         GameObject clone = Instantiate(bullet, bulletPos.position, bulletPos.rotation);
         Rigidbody2D crb = clone.GetComponent<Rigidbody2D>();

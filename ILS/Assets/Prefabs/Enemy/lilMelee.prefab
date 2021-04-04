@@ -76,7 +76,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 5
+  m_SortingOrder: 2
   m_Sprite: {fileID: -8185467747782742162, guid: bad25a3356507ad45be0a19e00604e8e,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -120,12 +120,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1050fa0a6a76b994287ca7e4be909718, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyHP: 20
+  enemyHP: 70
   coins: {fileID: 5463114531643536998, guid: 55c99137cdbe61e4792956f637477c1e, type: 3}
   lilMelee: 1
   lilRange: 0
   boar: 0
   scorpion: 0
+  skeleton: 0
   dmgTextObj: {fileID: 3068462681592775180, guid: f44c846c5fb637d49bbe5e7724dca8ee,
     type: 3}
   textPos: {fileID: 5960968357418251978}

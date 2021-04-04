@@ -26,14 +26,11 @@ public class DeadCanvasScript : MonoBehaviour
 
     public void _restartBtn()
     {
-        string sceneName;
-        sceneName = SceneManager.GetActiveScene().name;
-
-        SceneManager.LoadScene(sceneName);
+        GameObject.FindGameObjectWithTag("GameManager").GetComponent<Transition>().loadTransition(SceneManager.GetActiveScene().name);
     }
 
     public void _ExitBtn()
     {
-        SceneManager.LoadScene("Base");
+        GameObject.FindGameObjectWithTag("GameManager").GetComponent<Transition>().loadTransition("Base");
     }
 }

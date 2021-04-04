@@ -13,6 +13,9 @@ public class Enemy : MonoBehaviour
     [SerializeField] private bool lilRange = false;
     [SerializeField] private bool boar = false;
     [SerializeField] private bool scorpion = false;
+    [SerializeField] private bool skeleton = false;
+    [SerializeField] private bool bat = false;
+    [SerializeField] private bool fireTotem = false;
 
 
     public static List<Enemy> enemyList = new List<Enemy>();
@@ -62,9 +65,14 @@ public class Enemy : MonoBehaviour
 
     void exp()
     {
-        if(boar == true)
+        if (skeleton == true)
         {
-            PlayerPrefs.SetFloat("EXP", PlayerPrefs.GetFloat("EXP") + 5);
+            PlayerPrefs.SetFloat("EXP", PlayerPrefs.GetFloat("EXP") + 10);
+            PlayerPrefs.Save();
+        }
+        else if(boar == true)
+        {
+            PlayerPrefs.SetFloat("EXP", PlayerPrefs.GetFloat("EXP") + 10);
             PlayerPrefs.Save();
         }
         else if(lilMelee == true)
@@ -72,14 +80,23 @@ public class Enemy : MonoBehaviour
             PlayerPrefs.SetFloat("EXP", PlayerPrefs.GetFloat("EXP") + 10);
             PlayerPrefs.Save();
         }
+        else if(bat == true)
+        {
+            PlayerPrefs.SetFloat("EXP", PlayerPrefs.GetFloat("EXP") + 13);
+            PlayerPrefs.Save();
+        }
         else if(lilRange == true)
         {
             PlayerPrefs.SetFloat("EXP", PlayerPrefs.GetFloat("EXP") + 15);
             PlayerPrefs.Save();
+        }else if(lilRange == true)
+        {
+            PlayerPrefs.SetFloat("EXP", PlayerPrefs.GetFloat("EXP") + 20);
+            PlayerPrefs.Save();
         }
         else if(scorpion == true)
         {
-            PlayerPrefs.SetFloat("EXP", PlayerPrefs.GetFloat("EXP") + 20);
+            PlayerPrefs.SetFloat("EXP", PlayerPrefs.GetFloat("EXP") + 30);
             PlayerPrefs.Save();
         }
         Debug.Log("Player exp: " + PlayerPrefs.GetFloat("EXP"));

@@ -10,6 +10,7 @@ public class MenuScript : MonoBehaviour
     public GameObject aboutMenu;
     public GameObject helpMenu;
     public GameObject optionMenu;
+    public GameObject okAnnBtn;
     [Space]
     [Header("SOUNDS")]
     [SerializeField]private Slider musicSlider;
@@ -31,6 +32,11 @@ public class MenuScript : MonoBehaviour
     {
         musicSlider.value = PlayerPrefs.GetFloat("musicValue");
         SFXslider.value = PlayerPrefs.GetFloat("sfxValue");
+
+        if (SceneManager.GetActiveScene().name == "Main Menu")
+        {
+            okAnnBtn.SetActive(true);
+        }
 
         if(PlayerPrefs.GetInt("isCheat") == 1)
         {
@@ -178,6 +184,11 @@ public class MenuScript : MonoBehaviour
         sfxMenu();
     }
 
+    public void okAnnouncement()
+    {
+        sfxMenu();
+        Destroy(okAnnBtn);
+    }
     void sfxMenu()
     {
         this.GetComponent<menuSFX>().menuSound();

@@ -14,6 +14,7 @@ public class BulletScript : MonoBehaviour
         hitSFX = GameObject.FindGameObjectWithTag("PlayerParent").GetComponent<AudioSource>();
     }
 
+
     private void Update()
     {
         hitSFX.volume = (PlayerPrefs.GetFloat("sfxValue") / 100);
@@ -43,8 +44,6 @@ public class BulletScript : MonoBehaviour
         {
             Destroy(gameObject);
         }
-
-
     }
 
 }

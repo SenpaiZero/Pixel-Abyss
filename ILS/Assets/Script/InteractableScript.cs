@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -41,7 +41,7 @@ public class InteractableScript : MonoBehaviour
     {
         if (isInteractScene == true)
         {
-            float marketDist = Vector3.Distance(market.position, player.position);
+           float marketDist = Vector3.Distance(market.position, player.position);
            float magicDist = Vector3.Distance(magic.position, player.position);
            float caveDist = Vector3.Distance(cave.position, player.position);
 

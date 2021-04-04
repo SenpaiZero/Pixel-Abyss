@@ -139,7 +139,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 5
+  m_SortingOrder: 2
   m_Sprite: {fileID: 9071176939015239756, guid: 2071556a3fbf8ef408803a53804bcfd8,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -209,11 +209,10 @@ MonoBehaviour:
   bulletPos: {fileID: 8125213397186898863}
   bulletPos2: {fileID: 8125213398195413524}
   bulletPos3: {fileID: 8125213398799927541}
-  range: 7
+  range: 8
   alertRange: 10
   bulletSpeed: 7
   damage: 10
-  attackTimer: 175
 --- !u!114 &8125213397297539814
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -226,12 +225,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1050fa0a6a76b994287ca7e4be909718, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyHP: 50
+  enemyHP: 100
   coins: {fileID: 5463114531643536998, guid: 55c99137cdbe61e4792956f637477c1e, type: 3}
   lilMelee: 0
   lilRange: 0
   boar: 0
   scorpion: 1
+  skeleton: 0
+  bat: 0
   dmgTextObj: {fileID: 3068462681592775180, guid: f44c846c5fb637d49bbe5e7724dca8ee,
     type: 3}
   textPos: {fileID: 4708751029613997497}

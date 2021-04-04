@@ -69,7 +69,6 @@ public class Player : MonoBehaviour
         particleEmission.enabled = false;
 
 
-        speed = PlayerPrefs.GetFloat("movementSpeed");
         health = PlayerPrefs.GetFloat("health");
         mana = PlayerPrefs.GetFloat("mana");
         PlayerPrefs.SetFloat("currentHp", health);
@@ -85,6 +84,7 @@ public class Player : MonoBehaviour
     }
     private void Update()
     {
+        speed = PlayerPrefs.GetFloat("movementSpeed");
         tpSFX.volume = (PlayerPrefs.GetFloat("sfxValue") / 100);
         shootSFX.volume = (PlayerPrefs.GetFloat("sfxValue") / 100);
         levelUpSFX.volume = (PlayerPrefs.GetFloat("sfxValue") / 100);
@@ -154,7 +154,7 @@ public class Player : MonoBehaviour
 
         // E N E M Y   F U N C T I O N S
         //Finding Enemy
-        Invoke("findEnemy", 3f);
+        Invoke("findEnemy", 1f);
 
         //ENEMY COUNT
         enemyTimer++;
@@ -356,7 +356,6 @@ public class Player : MonoBehaviour
         {
             deadCanvas = GameObject.FindGameObjectWithTag("deadCanvas");
             deadCanvas.GetComponent<Animator>().Play("DeadAnim");
-
             PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") - lostCoins);
             PlayerPrefs.SetFloat("EXP", PlayerPrefs.GetFloat("EXP") - lostExp);
             isDead2 = true;
@@ -490,7 +489,7 @@ public class Player : MonoBehaviour
         isHpRegen = true;
         health += PlayerPrefs.GetFloat("healthRegen");
         Debug.Log("hp regen: " + PlayerPrefs.GetFloat("healthRegen"));
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(3f);
         isHpRegen = false;
     }
 
@@ -499,7 +498,7 @@ public class Player : MonoBehaviour
         isManaRegen = true;
         mana += PlayerPrefs.GetFloat("manaRegen");
         Debug.Log("mana regen: " + PlayerPrefs.GetFloat("manaRegen"));
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(3f);
         isManaRegen = false;
     }
 

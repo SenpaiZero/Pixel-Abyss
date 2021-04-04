@@ -107,7 +107,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 5
+  m_SortingOrder: 2
   m_Sprite: {fileID: -6305352756278442759, guid: d192e85a6c0785149a3c0dddef817c77,
     type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -179,7 +179,6 @@ MonoBehaviour:
   alertRange: 10
   bulletSpeed: 10
   damage: 5
-  attackTimer: 150
 --- !u!114 &1319521882751979290
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -198,6 +197,7 @@ MonoBehaviour:
   lilRange: 1
   boar: 0
   scorpion: 0
+  skeleton: 0
   dmgTextObj: {fileID: 3068462681592775180, guid: f44c846c5fb637d49bbe5e7724dca8ee,
     type: 3}
   textPos: {fileID: 4333242184594731304}

@@ -19,6 +19,7 @@ TagManager:
   - ImmovableObj
   - Computer
   - deadCanvas
+  - Projectile
   layers:
   - Default
   - TransparentFX

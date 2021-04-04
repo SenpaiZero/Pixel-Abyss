@@ -81,6 +81,8 @@ public class VariablesScript : MonoBehaviour
             PlayerPrefs.SetFloat("extraCoins", 0);
             PlayerPrefs.SetFloat("extraEXP", 0);
 
+            PlayerPrefs.SetInt("stageUnlocked", 1);
+
             PlayerPrefs.Save();
 
             //MENU

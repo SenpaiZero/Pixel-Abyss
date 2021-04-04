@@ -10,11 +10,13 @@ public class PoisonTrap : MonoBehaviour
     private float timer = 0;
     private bool isPoison = false;
     private GameObject player;
+    private float saveMovementspeed;
 
     private void Start()
     {
         timer = damageSpeed;
         player = GameObject.FindGameObjectWithTag("Player");
+        saveMovementspeed = PlayerPrefs.GetFloat("movementSpeed");
     }
 
     private void Update()
@@ -40,7 +42,10 @@ public class PoisonTrap : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "Player")
+        changeColorEnter();
+        PlayerPrefs.SetFloat("movementSpeed", PlayerPrefs.GetFloat("movementSpeed") / 2);
+        PlayerPrefs.Save();
+        if (collision.gameObject.tag == "Player")
         {
             isPoison = true;
         }
@@ -48,7 +53,10 @@ public class PoisonTrap : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if(collision.gameObject.tag == "Player")
+        changeColorExit();
+        PlayerPrefs.SetFloat("movementSpeed", saveMovementspeed);
+        PlayerPrefs.Save();
+        if (collision.gameObject.tag == "Player")
         {
             isPoison = false;
         }
@@ -57,6 +65,9 @@ public class PoisonTrap : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
+        changeColorEnter();
+        PlayerPrefs.SetFloat("movementSpeed", PlayerPrefs.GetFloat("movementSpeed") / 2);
+        PlayerPrefs.Save();
         if (collision.gameObject.tag == "Player")
         {
             isPoison = true;
@@ -65,9 +76,39 @@ public class PoisonTrap : MonoBehaviour
 
     private void OnCollisionExit2D(Collision2D collision)
     {
+        changeColorExit();
+        PlayerPrefs.SetFloat("movementSpeed", saveMovementspeed);
+        PlayerPrefs.Save();
         if (collision.gameObject.tag == "Player")
         {
             isPoison = false;
         }
+    }
+
+    private void OnDestroy()
+    {
+        PlayerPrefs.SetFloat("movementSpeed", saveMovementspeed);
+        PlayerPrefs.Save();
+    }
+
+    private void OnDisable()
+    {
+        PlayerPrefs.SetFloat("movementSpeed", saveMovementspeed);
+        PlayerPrefs.Save();
+    }
+
+    private void OnApplicationQuit()
+    {
+        PlayerPrefs.SetFloat("movementSpeed", saveMovementspeed);
+        PlayerPrefs.Save();
+    }
+
+    void changeColorEnter()
+    {
+        player.GetComponent<SpriteRenderer>().color = Color.green;
+    }
+    void changeColorExit()
+    {
+        player.GetComponent<SpriteRenderer>().color = Color.white;
     }
 }
