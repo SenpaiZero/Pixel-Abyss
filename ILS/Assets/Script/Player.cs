@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
@@ -157,16 +158,18 @@ public class Player : MonoBehaviour
         Invoke("findEnemy", 1f);
 
         //ENEMY COUNT
-        enemyTimer++;
-        if(enemyTimer >= enemyCountTime)
+        enemyCount = Enemy.enemyList.Count;
+        Debug.Log("Enemy Count: " + enemyCount);
+        if (enemyCount <= 0)
         {
-            enemyCount = Enemy.enemyList.Count;
-            Debug.Log("Enemy Count: " + enemyCount);
-            enemyTimer -= enemyCountTime;
+            if (isAllEnemyDead == false)
+            {
+                enemyAllDeadFunc();
+                isAllEnemyDead = true;
+                print("all enemy is dead");
+            }
         }
 
-        //enemy all dead function
-        StartCoroutine(enemyAllDead());
         //E N D   O F   E N E M Y    F U N C T I O N
 
 
@@ -404,6 +407,75 @@ public class Player : MonoBehaviour
         StartCoroutine("lvlUpDelay");
     }
 
+    void enemyAllDeadFunc()
+    {
+        string sceneName = SceneManager.GetActiveScene().name;
+
+        if(sceneName == "Stage 1")
+        {
+            if (PlayerPrefs.GetInt("stageUnlock") > 1)
+            {
+                PlayerPrefs.SetInt("stageUnlocked", 2);
+            }
+        }
+        if (sceneName == "Stage 2")
+        {
+            if (PlayerPrefs.GetInt("stageUnlock") <= 2)
+            {
+                PlayerPrefs.SetInt("stageUnlocked", 3);
+            }
+        }
+        if (sceneName == "Stage 3")
+        {
+            if (PlayerPrefs.GetInt("stageUnlock") > 3)
+            {
+                PlayerPrefs.SetInt("stageUnlocked", 4);
+            }
+        }
+        if(sceneName == "Stage 4")
+        {
+            if (PlayerPrefs.GetInt("stageUnlock") <= 4)
+            {
+                PlayerPrefs.SetInt("stageUnlocked", 5);
+            }
+        }
+        if(sceneName == "Stage 5")
+        {
+            if (PlayerPrefs.GetInt("stageUnlock") <= 5)
+            {
+                PlayerPrefs.SetInt("stageUnlocked", 6);
+            }
+        }
+        if(sceneName == "Stage 6")
+        {
+            if (PlayerPrefs.GetInt("stageUnlock") <= 6)
+            {
+                PlayerPrefs.SetInt("stageUnlocked", 7);
+            }
+        }
+        if(sceneName == "Stage 7")
+        {
+            if (PlayerPrefs.GetInt("stageUnlock") <= 7)
+            {
+                PlayerPrefs.SetInt("stageUnlocked", 8);
+            }
+        }
+        if(sceneName == "Stage 8")
+        {
+            if (PlayerPrefs.GetInt("stageUnlock") <= 8)
+            {
+                PlayerPrefs.SetInt("stageUnlocked", 9);
+            }
+        }
+        if(sceneName == "Stage 9")
+        {
+            if (PlayerPrefs.GetInt("stageUnlock") <= 9)
+            {
+                PlayerPrefs.SetInt("stageUnlocked", 10);
+            }
+        }
+    }
+
     IEnumerator lvlUpDelay()
     {
         var particleEmission = lvlUp.emission;
@@ -418,16 +490,6 @@ public class Player : MonoBehaviour
 
 
     //Add delay on finding if every enemy is dead
-    IEnumerator enemyAllDead()
-    {
-        yield return new WaitForSeconds(5f);
-
-        if (enemyCount <= 0 && isAllEnemyDead == false)
-        {
-            Debug.Log("All of the enemy is dead");
-            isAllEnemyDead = true;
-        }
-    }
 
     IEnumerator footStepFunc()
     {
