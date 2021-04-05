@@ -16,6 +16,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private bool skeleton = false;
     [SerializeField] private bool bat = false;
     [SerializeField] private bool fireTotem = false;
+    [SerializeField] private bool flyingMelee = false;
 
 
     public static List<Enemy> enemyList = new List<Enemy>();
@@ -83,6 +84,11 @@ public class Enemy : MonoBehaviour
         else if(bat == true)
         {
             PlayerPrefs.SetFloat("EXP", PlayerPrefs.GetFloat("EXP") + 13);
+            PlayerPrefs.Save();
+        }
+        else if(flyingMelee == true)
+        {
+            PlayerPrefs.SetFloat("EXP", PlayerPrefs.GetFloat("EXP") + 23);
             PlayerPrefs.Save();
         }
         else if(lilRange == true)

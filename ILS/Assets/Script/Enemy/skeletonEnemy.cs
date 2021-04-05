@@ -19,9 +19,6 @@ public class skeletonEnemy : MonoBehaviour
     bool isWithin = true;
     float Dist;
     NavMeshAgent agent;
-
-
-
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
