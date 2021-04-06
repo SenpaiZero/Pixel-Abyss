@@ -44,12 +44,13 @@ public class Player : MonoBehaviour
     private GameObject animTP;
     private GameObject skillChild;
 
+    private bool isTeleporting = false;
+
     bool isDead2 = false;
     private bool isFootStep = false;
     private bool isTeleportCD = false;
     private bool isTornadoCD = false;
     private float angle;
-    private bool isTeleporting = false;
     private bool isTornado = false;
     private float atkTimer = 0;
     private float health;
@@ -508,6 +509,7 @@ public class Player : MonoBehaviour
         animTP.GetComponent<Animator>().Play("tp new v3");
         Physics2D.IgnoreLayerCollision(15, 8, true);
         Physics2D.IgnoreLayerCollision(15, 20, true);
+        Physics2D.IgnoreLayerCollision(15, 17, true);
 
         yield return new WaitForSeconds(0.400f);
 
@@ -517,6 +519,7 @@ public class Player : MonoBehaviour
         yield return new WaitForSeconds(0.200f);
         Physics2D.IgnoreLayerCollision(15, 8, false);
         Physics2D.IgnoreLayerCollision(15, 20, false);
+        Physics2D.IgnoreLayerCollision(15, 17, false);
         isTeleporting = false;
     }
 
@@ -525,8 +528,8 @@ public class Player : MonoBehaviour
         mana -= 50f;
         GameObject clone = Instantiate(prefabTornado, aimRot.transform.position, Quaternion.identity);
         Rigidbody2D crb1 = clone.GetComponent<Rigidbody2D>();
-        crb1.AddForce(aimPos.right * 2f, ForceMode2D.Impulse);
-        crb1.velocity = Vector2.ClampMagnitude(crb1.velocity, 2f);
+        crb1.AddForce(aimPos.right * 3f, ForceMode2D.Impulse);
+        crb1.velocity = Vector2.ClampMagnitude(crb1.velocity, 3f);
         Destroy(clone, 10f);
 
         yield return null;

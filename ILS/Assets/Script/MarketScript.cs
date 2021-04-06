@@ -8,6 +8,7 @@ public class MarketScript : MonoBehaviour
 {
     public TextMeshProUGUI hpCount;
     public TextMeshProUGUI mpCount;
+    public GameObject errorPopup;
 
     private void Update()
     {
@@ -24,8 +25,12 @@ public class MarketScript : MonoBehaviour
             menuSFX();
             PlayerPrefs.Save();
         }
+        else
+        {
+            GameObject clone = Instantiate(errorPopup, transform.position, Quaternion.identity);
+            clone.transform.parent = gameObject.transform;
+        }
     }
-
     public void shopMP_Pots()
     {
         if(PlayerPrefs.GetInt("Coins") >= 10)
@@ -34,6 +39,11 @@ public class MarketScript : MonoBehaviour
             PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") - 20);
             menuSFX();
             PlayerPrefs.Save();
+        }
+        else
+        {
+            GameObject clone = Instantiate(errorPopup, transform.position, Quaternion.identity);
+            clone.transform.parent = gameObject.transform;
         }
     }
 

@@ -38,26 +38,30 @@ public class PoisonTrap : MonoBehaviour
                 timer = 0;
             }
         }
+        else
+        {
+            changeColorExit();
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        changeColorEnter();
-        PlayerPrefs.SetFloat("movementSpeed", PlayerPrefs.GetFloat("movementSpeed") / 2);
-        PlayerPrefs.Save();
         if (collision.gameObject.tag == "Player")
         {
+            changeColorEnter();
+            PlayerPrefs.SetFloat("movementSpeed", PlayerPrefs.GetFloat("movementSpeed") / 2);
+            PlayerPrefs.Save();
             isPoison = true;
         }
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        changeColorExit();
-        PlayerPrefs.SetFloat("movementSpeed", saveMovementspeed);
-        PlayerPrefs.Save();
         if (collision.gameObject.tag == "Player")
         {
+            changeColorExit();
+            PlayerPrefs.SetFloat("movementSpeed", saveMovementspeed);
+            PlayerPrefs.Save();
             isPoison = false;
         }
     }
@@ -65,23 +69,23 @@ public class PoisonTrap : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        changeColorEnter();
-        PlayerPrefs.SetFloat("movementSpeed", PlayerPrefs.GetFloat("movementSpeed") / 2);
-        PlayerPrefs.Save();
         if (collision.gameObject.tag == "Player")
         {
             isPoison = true;
+            changeColorEnter();
+            PlayerPrefs.SetFloat("movementSpeed", PlayerPrefs.GetFloat("movementSpeed") / 2);
+            PlayerPrefs.Save();
         }
     }
 
     private void OnCollisionExit2D(Collision2D collision)
     {
-        changeColorExit();
-        PlayerPrefs.SetFloat("movementSpeed", saveMovementspeed);
-        PlayerPrefs.Save();
         if (collision.gameObject.tag == "Player")
         {
             isPoison = false;
+            changeColorExit();
+            PlayerPrefs.SetFloat("movementSpeed", saveMovementspeed);
+            PlayerPrefs.Save();
         }
     }
 

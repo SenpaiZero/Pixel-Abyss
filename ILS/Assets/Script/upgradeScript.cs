@@ -16,6 +16,8 @@ public class upgradeScript : MonoBehaviour
     bool isIcon = false;
     int r = 51, g = 51, b = 51;
 
+    [SerializeField] GameObject errorPopup;
+    [Space]
     [SerializeField]private GameObject upgradeObj;
     [Space]
     [Header("Text")]
@@ -216,6 +218,11 @@ public class upgradeScript : MonoBehaviour
                 PlayerPrefs.SetInt("skillSpent", PlayerPrefs.GetInt("skillSpent") + 1);
                 PlayerPrefs.Save();
             }
+            else
+            {
+                GameObject clone = Instantiate(errorPopup, transform.position, Quaternion.identity);
+                clone.transform.parent = gameObject.transform;
+            }
         }
     }
 
@@ -233,6 +240,11 @@ public class upgradeScript : MonoBehaviour
                 PlayerPrefs.SetInt("skillPoints", PlayerPrefs.GetInt("skillPoints") - 1);
                 PlayerPrefs.SetInt("skillSpent", PlayerPrefs.GetInt("skillSpent") + 1);
                 PlayerPrefs.Save();
+            }
+            else
+            {
+                GameObject clone = Instantiate(errorPopup, transform.position, Quaternion.identity);
+                clone.transform.parent = gameObject.transform;
             }
         }
     }
@@ -252,6 +264,11 @@ public class upgradeScript : MonoBehaviour
                 PlayerPrefs.SetInt("skillSpent", PlayerPrefs.GetInt("skillSpent") + 1);
                 PlayerPrefs.Save();
             }
+            else
+            {
+                GameObject clone = Instantiate(errorPopup, transform.position, Quaternion.identity);
+                clone.transform.parent = gameObject.transform;
+            }
         }
     }
     public void upgradeVitality()
@@ -268,6 +285,11 @@ public class upgradeScript : MonoBehaviour
                 PlayerPrefs.SetInt("skillSpent", PlayerPrefs.GetInt("skillSpent") + 1);
                 PlayerPrefs.Save();
             }
+            else
+            {
+                GameObject clone = Instantiate(errorPopup, transform.position, Quaternion.identity);
+                clone.transform.parent = gameObject.transform;
+            }
         }
     }
     public void upgradeGreed()
@@ -283,6 +305,10 @@ public class upgradeScript : MonoBehaviour
                 PlayerPrefs.SetInt("skillPoints", PlayerPrefs.GetInt("skillPoints") - 1);
                 PlayerPrefs.SetInt("skillSpent", PlayerPrefs.GetInt("skillSpent") + 1);
                 PlayerPrefs.Save();
+            } else
+            {
+                GameObject clone = Instantiate(errorPopup, transform.position, Quaternion.identity);
+                clone.transform.parent = gameObject.transform;
             }
         }
     }
