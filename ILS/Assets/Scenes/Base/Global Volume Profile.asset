@@ -38,16 +38,16 @@ MonoBehaviour:
     min: 0
   scatter:
     m_OverrideState: 0
-    m_Value: 0.7
+    m_Value: 0.836
     min: 0
     max: 1
   clamp:
     m_OverrideState: 0
-    m_Value: 65472
+    m_Value: 65469.03
     min: 0
   tint:
     m_OverrideState: 0
-    m_Value: {r: 1, g: 1, b: 1, a: 1}
+    m_Value: {r: 0, g: 0.39538956, b: 1, a: 1}
     hdr: 0
     showAlpha: 0
     showEyeDropper: 1
@@ -59,5 +59,5 @@ MonoBehaviour:
     m_Value: {fileID: 0}
   dirtIntensity:
     m_OverrideState: 0
-    m_Value: 0
+    m_Value: 3989
     min: 0
