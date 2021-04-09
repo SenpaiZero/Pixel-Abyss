@@ -39,7 +39,7 @@ public class EnemyBullet : MonoBehaviour
 
     IEnumerator removeRB()
     {
-        yield return new WaitForSeconds(0.1f);
+        yield return new WaitForSeconds(0.05f);
         rb.simulated = false;
     }
 
