@@ -20,7 +20,6 @@ public class Boss5Enemy : MonoBehaviour
     public float fireRate;
     public float bulletRotSpeed;
     bool isRotate = false;
-    bool isRotateAttack = false;
 
     [Space]
     [Header("Hand Attack")]
@@ -44,13 +43,16 @@ public class Boss5Enemy : MonoBehaviour
     public float spikeSpeed;
     public AudioSource spikeSFX;
     public AudioSource spikeMove;
-    bool isSpikeAttack = false;
 
 
     //etx private
     Vector3 dir;
     float angle;
     Quaternion spikeRot;
+    int attackType;
+    bool isReadyAttack = false;
+
+
     private void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -58,29 +60,17 @@ public class Boss5Enemy : MonoBehaviour
 
     private void Update()
     {
+        soundControl();
+
         if(isRotate == true)
         {
             bulletRot.Rotate(new Vector3(0, 0, bulletRotSpeed * Time.deltaTime));
         }
 
-        //Debug
-        if (Input.GetKeyDown(KeyCode.Keypad1))
+        if(isReadyAttack == false)
         {
-            if (isRotateAttack == false)
-            {
-                StartCoroutine("rotateAttack");
-            }
-        }
-        if (Input.GetKeyDown(KeyCode.Keypad2))
-        {
-            if (isSpikeAttack == false)
-            {
-                StartCoroutine(spikeAttack());
-            }
-        }
-        if(Input.GetKeyDown(KeyCode.Keypad3))
-        {
-            StartCoroutine(laserAttack());
+            isReadyAttack = true;
+            StartCoroutine(randomAttack());
         }
 
         if(moveRight == true)
@@ -95,7 +85,6 @@ public class Boss5Enemy : MonoBehaviour
 
     IEnumerator rotateAttack()
     {
-        isRotateAttack = true;
         isRotate = true;
         int i = 0;
         while(i < bulletCount) {
@@ -105,9 +94,9 @@ public class Boss5Enemy : MonoBehaviour
             yield return new WaitForSeconds(fireRate);
         }
 
-        //isRotateAttack = false;
         isRotate = false;
         rotSFX.Stop();
+        isReadyAttack = false;
     }
 
     private void rotateShooting()
@@ -136,7 +125,6 @@ public class Boss5Enemy : MonoBehaviour
 
     IEnumerator spikeAttack()
     {
-        isSpikeAttack = true;
         bodyAnim.Play("SpikeAttackBody");
         spikeSFX.Play();
         GameObject clone = Instantiate(prefabSpike, spikePos[0].position, Quaternion.identity);
@@ -201,8 +189,8 @@ public class Boss5Enemy : MonoBehaviour
 
         yield return new WaitForSeconds(0.5f);
         bodyAnim.Play("bossIdle");
-        isSpikeAttack = false;
         spikeSFX.Stop();
+        isReadyAttack = false;
     }
 
     private void spikeRot_(int i)
@@ -254,6 +242,7 @@ public class Boss5Enemy : MonoBehaviour
         yield return new WaitForSeconds(3f);
         laserLeft.Play("BossHandIdle");
         laserRight.Play("BossHandIdle");
+        isReadyAttack = false;
     }
 
     private void laserShoot(bool isRight)
@@ -269,5 +258,33 @@ public class Boss5Enemy : MonoBehaviour
             clone.transform.localScale = new Vector2(-1, 1);
             Destroy(clone, 3f);
         }
+    }
+
+    IEnumerator randomAttack()
+    {
+        attackType = Random.Range(1, 4);
+        print(attackType);
+        yield return new WaitForSeconds(4f);
+        
+        switch(attackType)
+        {
+            case 1:
+                StartCoroutine(rotateAttack());
+                break;
+            case 2:
+                StartCoroutine(spikeAttack());
+                break;
+            case 3:
+                StartCoroutine(laserAttack());
+                break;
+        }
+
+    }
+
+    private void soundControl()
+    {
+        laserSFX.volume = (PlayerPrefs.GetFloat("sfxValue") / 100);
+        rotSFX.volume = (PlayerPrefs.GetFloat("sfxValue") / 100);
+        spikeSFX.volume = (PlayerPrefs.GetFloat("sfxValue") / 100);
     }
 }

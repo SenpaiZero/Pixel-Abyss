@@ -119,6 +119,12 @@ public class statusScript : MonoBehaviour
         }
     }
 
+    public void completeAllStageCheat()
+    {
+        PlayerPrefs.SetInt("stageUnlocked", 5);
+        PlayerPrefs.Save();
+    }
+
     public void cheatCoins()
     {
         PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") + 50);

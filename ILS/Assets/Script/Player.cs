@@ -537,8 +537,10 @@ public class Player : MonoBehaviour
 
     IEnumerator skillCDTornado()
     {
+        float cd;
+        cd = 5 * (PlayerPrefs.GetFloat("cdr") / 100);
         isTornadoCD = true;
-        yield return new WaitForSeconds(5f);
+        yield return new WaitForSeconds(5f - cd);
         isTornadoCD = false;
     }
 

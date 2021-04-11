@@ -23,7 +23,7 @@ public class VariablesScript : MonoBehaviour
     private int level = 1;
     private float exp = 0f;
     private float expToLvlUp = 100f;
-    private int skillPoint = 5;
+    private int skillPoint = 0;
 
     //POTS
     private int ManaPots;
@@ -78,8 +78,8 @@ public class VariablesScript : MonoBehaviour
             PlayerPrefs.SetInt("hpPots", HpPots);
             PlayerPrefs.SetInt("manaPots", ManaPots);
 
-            PlayerPrefs.SetFloat("extraCoins", 0);
-            PlayerPrefs.SetFloat("extraEXP", 0);
+            PlayerPrefs.SetInt("extraCoins", 1);
+            PlayerPrefs.SetFloat("extraEXP", 1);
 
             PlayerPrefs.SetInt("stageUnlocked", 1);
 

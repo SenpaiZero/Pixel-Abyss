@@ -10,7 +10,7 @@ public class CoinScript : MonoBehaviour
     public CircleCollider2D cr;
     private void Start()
     {
-        rand = Random.Range(1, 5);
+        rand = Random.Range(1, 5) * PlayerPrefs.GetInt("extraCoins");
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

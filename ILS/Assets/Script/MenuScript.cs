@@ -7,7 +7,7 @@ using TMPro;
 
 public class MenuScript : MonoBehaviour
 {
-    public GameObject aboutMenu;
+    public GameObject tutorial;
     public GameObject helpMenu;
     public GameObject optionMenu;
     public GameObject okAnnBtn;
@@ -145,9 +145,9 @@ public class MenuScript : MonoBehaviour
         sfxMenu();
     }
 
-    public void _aboutMenu()
+    public void _TutorialMenu()
     {
-        aboutMenu.SetActive(true);
+        tutorial.SetActive(true);
         sfxMenu();
     }
 
@@ -171,9 +171,15 @@ public class MenuScript : MonoBehaviour
         sfxMenu();
     }
 
-    public void _closeAboutMenu()
+    public void _noTutorialMenu()
     {
-        aboutMenu.SetActive(false);
+       tutorial.SetActive(false);
+        sfxMenu();
+    }
+
+    public void _yesTutorialMenu()
+    {
+        GameObject.FindGameObjectWithTag("GameManager").GetComponent<Transition>().loadTransition("TutorialScene");
         sfxMenu();
     }
 

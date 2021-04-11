@@ -6,6 +6,7 @@ public class BulletScript : MonoBehaviour
 {
     private float wandDamage;
     private AudioSource hitSFX;
+    float rand;
 
     [SerializeField] private GameObject explosionPrefab;
     private void Awake()
@@ -14,7 +15,11 @@ public class BulletScript : MonoBehaviour
         hitSFX = GameObject.FindGameObjectWithTag("PlayerParent").GetComponent<AudioSource>();
     }
 
-
+    private void Start()
+    {
+        rand = Random.Range(1, 101);
+        print(rand);
+    }
     private void Update()
     {
         hitSFX.volume = (PlayerPrefs.GetFloat("sfxValue") / 100);
@@ -33,7 +38,14 @@ public class BulletScript : MonoBehaviour
 
         if (collision.gameObject.tag == "Enemy")
         {
-            collision.GetComponent<Enemy>().takeDamage(wandDamage);
+            if (rand > PlayerPrefs.GetFloat("critChance"))
+            {
+                collision.GetComponent<Enemy>().takeDamage(wandDamage, false);
+            }
+            else
+            {
+                collision.GetComponent<Enemy>().takeDamage(wandDamage * 2, true);
+            }
         }
 
         if (collision.gameObject.tag == "Player" || collision.gameObject.tag == "GrassWall")

@@ -35,7 +35,7 @@ public class SkillDamage : MonoBehaviour
             {
                 for (int i = 0; i < enemyInRange.Length; i++)
                 {
-                    enemyInRange[i].GetComponent<Enemy>().takeDamage(skillDmg);
+                    enemyInRange[i].GetComponent<Enemy>().takeDamage(skillDmg, false);
                     Debug.Log("Enemy Skill Damaged Taken");
                     timer =0;
                 }

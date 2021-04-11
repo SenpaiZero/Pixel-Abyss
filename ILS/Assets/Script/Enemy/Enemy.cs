@@ -7,7 +7,6 @@ using UnityEngine.UI;
 public class Enemy : MonoBehaviour
 {
     [SerializeField] private float enemyHP = 10;
-    [SerializeField] private GameObject coins;
 
     [SerializeField] private bool lilMelee = false;
     [SerializeField] private bool lilRange = false;
@@ -18,6 +17,18 @@ public class Enemy : MonoBehaviour
     [SerializeField] private bool fireTotem = false;
     [SerializeField] private bool flyingMelee = false;
 
+    [Header("boss")]
+    public bool isBoss = false;
+    [SerializeField] private bool isStage5Boss = false;
+    public TextMeshProUGUI bossHPtxt;
+    public Image bossHPimg;
+    private float bossMaxHP;
+
+
+    [Header("etc")]
+    public GameObject dmgTextObj;
+    public Transform textPos;
+    [SerializeField] private GameObject coins;
 
     public static List<Enemy> enemyList = new List<Enemy>();
 
@@ -26,24 +37,53 @@ public class Enemy : MonoBehaviour
         return enemyList;
     }
 
-    public GameObject dmgTextObj;
-    public Transform textPos;
 
     private void Awake()
     {
         enemyList.Add(this);
     }
 
-    public void takeDamage(float ammount)
+    private void Start()
+    {
+        if (isBoss)
+        {
+            bossMaxHP = enemyHP;
+        }
+    }
+
+    private void Update()
+    {
+        if (isBoss)
+        {
+            bossHPimg.fillAmount = enemyHP / bossMaxHP;
+            bossHPtxt.text = "" + enemyHP.ToString("0") + " / " + bossMaxHP;
+        }
+    }
+
+
+
+    public void takeDamage(float ammount, bool isCrit)
     {
         enemyHP -= ammount;
         if (PlayerPrefs.GetInt("isDamage") == 0)
         {
-            GameObject clone = Instantiate(dmgTextObj, textPos.position, Quaternion.identity);
-            clone.GetComponentInChildren<TextMeshPro>().text = "" + ammount.ToString("F0");
-            clone.transform.parent = transform.parent;
-            Destroy(clone, 3f);
-            Debug.Log("Text Enemy Damage Instantiated");
+            if (isCrit == false)
+            {
+                GameObject clone = Instantiate(dmgTextObj, textPos.position, Quaternion.identity);
+                clone.GetComponentInChildren<TextMeshPro>().text = "" + ammount.ToString("F0");
+                clone.transform.parent = transform.parent;
+                Destroy(clone, 3f);
+                Debug.Log("Text Enemy Damage Instantiated");
+            }
+            else
+            {
+                GameObject clone = Instantiate(dmgTextObj, textPos.position, Quaternion.identity);
+                clone.GetComponentInChildren<TextMeshPro>().text = "" + ammount.ToString("F0");
+                clone.transform.parent = transform.parent;
+                clone.GetComponentInChildren<TextMeshPro>().color = Color.red;
+                Destroy(clone, 3f);
+                Debug.Log("Text Enemy crit Instantiated");
+            }
         }
 
 
@@ -56,11 +96,21 @@ public class Enemy : MonoBehaviour
 
     void enemyDead()
     {
-        GameObject clone = Instantiate(coins, transform.position, Quaternion.identity);
-        Destroy(clone, 20f);
-        exp();
-        enemyList.Remove(this);
-        Destroy(gameObject);
+        if (isBoss == false)
+        {
+            GameObject clone = Instantiate(coins, transform.position, Quaternion.identity);
+            Destroy(clone, 20f);
+            exp();
+            enemyList.Remove(this);
+            Destroy(gameObject);
+        }
+        else
+        {
+            enemyList.Remove(this);
+            Destroy(gameObject);
+            exp();
+            //instantiate treasure chest
+        }
 
     }
 
@@ -68,41 +118,39 @@ public class Enemy : MonoBehaviour
     {
         if (skeleton == true)
         {
-            PlayerPrefs.SetFloat("EXP", PlayerPrefs.GetFloat("EXP") + 10);
-            PlayerPrefs.Save();
+            getExp(10);
         }
         else if(boar == true)
         {
-            PlayerPrefs.SetFloat("EXP", PlayerPrefs.GetFloat("EXP") + 10);
-            PlayerPrefs.Save();
+            getExp(10);
         }
         else if(lilMelee == true)
         {
-            PlayerPrefs.SetFloat("EXP", PlayerPrefs.GetFloat("EXP") + 10);
-            PlayerPrefs.Save();
+            getExp(10);
         }
         else if(bat == true)
         {
-            PlayerPrefs.SetFloat("EXP", PlayerPrefs.GetFloat("EXP") + 13);
-            PlayerPrefs.Save();
+            getExp(13);
         }
         else if(flyingMelee == true)
         {
-            PlayerPrefs.SetFloat("EXP", PlayerPrefs.GetFloat("EXP") + 23);
-            PlayerPrefs.Save();
+            getExp(23);
         }
         else if(lilRange == true)
         {
-            PlayerPrefs.SetFloat("EXP", PlayerPrefs.GetFloat("EXP") + 15);
-            PlayerPrefs.Save();
-        }else if(lilRange == true)
+            getExp(15);
+        }
+        else if(lilRange == true)
         {
-            PlayerPrefs.SetFloat("EXP", PlayerPrefs.GetFloat("EXP") + 20);
-            PlayerPrefs.Save();
+            getExp(20);
         }
         else if(scorpion == true)
         {
-            PlayerPrefs.SetFloat("EXP", PlayerPrefs.GetFloat("EXP") + 30);
+            getExp(30);
+        }
+        else if(isStage5Boss == true)
+        {
+            getExp(200);
             PlayerPrefs.Save();
         }
         Debug.Log("Player exp: " + PlayerPrefs.GetFloat("EXP"));
@@ -120,6 +168,12 @@ public class Enemy : MonoBehaviour
             PlayerPrefs.Save();
             Debug.Log("Level: " + PlayerPrefs.GetInt("Level"));
         }
+    }
+
+    private void getExp(float exp)
+    {
+        PlayerPrefs.SetFloat("EXP", PlayerPrefs.GetFloat("EXP") + (exp * PlayerPrefs.GetFloat("extraEXP")));
+        PlayerPrefs.Save();
     }
 
 }

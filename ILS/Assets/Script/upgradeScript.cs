@@ -174,7 +174,7 @@ public class upgradeScript : MonoBehaviour
         powerText.text = "" + PlayerPrefs.GetFloat("wandDamage") + " Damage \n" + PlayerPrefs.GetFloat("critChance") + "% CRIT CHANCE";
         magicText.text = "" + PlayerPrefs.GetFloat("mana") + " MANA \n" + PlayerPrefs.GetFloat("manaRegen") + " mana regen \n" + PlayerPrefs.GetFloat("cdr") + "% Cooldown Reduction";
         vitalityText.text = "" + PlayerPrefs.GetFloat("health") + " health \n" + PlayerPrefs.GetFloat("healthRegen") + " health regen";
-        greedText.text = "" + PlayerPrefs.GetFloat("extraCoins") + "% extra coins \n" + PlayerPrefs.GetFloat("extraEXP") + "% extra exp";
+        greedText.text = "" + PlayerPrefs.GetInt("extraCoins") + "x extra coins \n" + PlayerPrefs.GetFloat("extraEXP") + "x extra exp";
         hasteText.text = "" + PlayerPrefs.GetInt("attackSpeedCounter") + "% attack speed \n" + PlayerPrefs.GetInt("movementSpeedCounter") + "% movement speed";
 
         if(PlayerPrefs.GetInt("powerLevel") == 15)
@@ -299,8 +299,8 @@ public class upgradeScript : MonoBehaviour
             if(skillPoints >= 1)
             {
                 sfxMenu();
-                PlayerPrefs.SetFloat("extraCoins", PlayerPrefs.GetFloat("extraCoins") + 5); //5%
-                PlayerPrefs.SetFloat("extraEXP", PlayerPrefs.GetFloat("extraEXP") + 5); //5%
+                PlayerPrefs.SetInt("extraCoins", PlayerPrefs.GetInt("extraCoins") + 1); //x1
+                PlayerPrefs.SetFloat("extraEXP", PlayerPrefs.GetFloat("extraEXP") + 1); //x1
                 PlayerPrefs.SetInt("greedLevel", PlayerPrefs.GetInt("greedLevel") + 1);
                 PlayerPrefs.SetInt("skillPoints", PlayerPrefs.GetInt("skillPoints") - 1);
                 PlayerPrefs.SetInt("skillSpent", PlayerPrefs.GetInt("skillSpent") + 1);
@@ -332,8 +332,8 @@ public class upgradeScript : MonoBehaviour
         PlayerPrefs.SetFloat("cdr", 0);
         PlayerPrefs.SetInt("attackSpeedCounter", 0);
         PlayerPrefs.SetInt("movementSpeedCounter", 0);
-        PlayerPrefs.SetFloat("extraCoins", 0);
-        PlayerPrefs.SetFloat("extraEXP", 0);
+        PlayerPrefs.SetInt("extraCoins", 1);
+        PlayerPrefs.SetFloat("extraEXP", 1);
 
         PlayerPrefs.SetFloat("health", 50);
         PlayerPrefs.SetFloat("healthRegen", 1);

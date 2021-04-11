@@ -138,6 +138,14 @@ public class BatEnemy : MonoBehaviour
         crb8.AddForce(bulletPos8.up * bulletSpeed, ForceMode2D.Impulse);
         crb8.velocity = Vector2.ClampMagnitude(crb8.velocity, bulletSpeed);
 
+        Destroy(clone, 10f);
+        Destroy(clone2, 10f);
+        Destroy(clone3, 10f);
+        Destroy(clone4, 10f);
+        Destroy(clone5, 10f);
+        Destroy(clone6, 10f);
+        Destroy(clone7, 10f);
+        Destroy(clone8, 10f);
 
 
         Debug.Log("bat attack");
