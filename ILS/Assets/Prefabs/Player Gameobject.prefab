@@ -5336,6 +5336,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   lostCoins: 0
   lostExp: 0
+  endCanvas: {fileID: 0}
   dashSpeed: 1.5
   botSkillBtn: {fileID: 0}
   topSkillBtn: {fileID: 0}

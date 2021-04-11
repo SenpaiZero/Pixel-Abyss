@@ -171,6 +171,9 @@ public class statusScript : MonoBehaviour
         //reset mana hp
         PlayerPrefs.SetFloat("health", 50);
         PlayerPrefs.SetFloat("mana", 50);
+
+
+        PlayerPrefs.SetInt("stageUnlocked", 1);
         PlayerPrefs.Save();
     }
 

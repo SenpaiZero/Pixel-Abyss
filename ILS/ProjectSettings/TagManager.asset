@@ -21,6 +21,7 @@ TagManager:
   - deadCanvas
   - Projectile
   - poison
+  - End
   layers:
   - Default
   - TransparentFX

@@ -9,6 +9,7 @@ public class Player : MonoBehaviour
 {
     [HideInInspector]public int lostCoins;
     [HideInInspector] public float lostExp;
+    [SerializeField]private GameObject endCanvas;
 
     [Header("Skills")]
     private float speed;
@@ -69,7 +70,6 @@ public class Player : MonoBehaviour
     {
         var particleEmission = lvlUp.emission;
         particleEmission.enabled = false;
-
 
         health = PlayerPrefs.GetFloat("health");
         mana = PlayerPrefs.GetFloat("mana");
@@ -161,13 +161,17 @@ public class Player : MonoBehaviour
         //ENEMY COUNT
         enemyCount = Enemy.enemyList.Count;
         Debug.Log("Enemy Count: " + enemyCount);
-        if (enemyCount <= 0)
+        if (SceneManager.GetActiveScene().name != "Base" && SceneManager.GetActiveScene().name != "TutorialScene")
         {
-            if (isAllEnemyDead == false)
+            if (enemyCount <= 0)
             {
-                enemyAllDeadFunc();
-                isAllEnemyDead = true;
-                print("all enemy is dead");
+                if (isAllEnemyDead == false)
+                {
+                    enemyAllDeadFunc();
+                    isAllEnemyDead = true;
+                    endCanvas.SetActive(true);
+                    print("all enemy is dead");
+                }
             }
         }
 
