@@ -14,6 +14,8 @@ public class skeletonEnemy : MonoBehaviour
     private float attackTimer = 1f;
     private float timer;
 
+    public AudioSource sfx;
+
     private bool isAlert = false;
     private bool isAttacking = false;
     bool isWithin = true;
@@ -88,7 +90,7 @@ public class skeletonEnemy : MonoBehaviour
         yield return new WaitForSeconds(1f);
 
         anim.Play("skeliLeftAttack");
-
+        sfx.Play();
         if (Dist <= range)
         {
             player.GetComponent<Player>().playerTakeDamage(damage);

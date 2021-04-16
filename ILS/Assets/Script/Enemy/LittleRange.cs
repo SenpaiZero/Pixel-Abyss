@@ -17,6 +17,8 @@ public class LittleRange : MonoBehaviour
     private float attackTimer = 2f;
     private float timer;
 
+    public AudioSource sfx;
+
     private bool isAlert = false;
     NavMeshAgent agent;
 
@@ -49,6 +51,7 @@ public class LittleRange : MonoBehaviour
                     Vector3 dir = player.transform.position - transform.position;
                     float angle = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg - 90;
                     bulletPos.rotation = Quaternion.AngleAxis(angle, Vector3.forward);
+                    sfx.Play();
                     attack();
                     agent.SetDestination(-player.transform.position);
                     timer = 0;

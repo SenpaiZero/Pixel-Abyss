@@ -14,11 +14,14 @@ public class FlyingMeleeEnemy : MonoBehaviour
     private float attackTimer = 1f;
     private float timer;
 
+    public AudioSource sfx;
+
     private bool isAlert = false;
     private bool isAttacking = false;
     float Dist;
     bool isDmg = false;
     NavMeshAgent agent;
+    bool isSFX = false;
 
     private void Start()
     {
@@ -47,8 +50,11 @@ public class FlyingMeleeEnemy : MonoBehaviour
                 timer += Time.deltaTime;
                 if (timer >= attackTimer)
                 {
-                    StartCoroutine("attackDelay");
-                    timer = 0;
+                    if (isSFX == false)
+                    {
+                        StartCoroutine("attackDelay");
+                        timer = 0;
+                    }
                 }
             }
             //move
@@ -80,12 +86,16 @@ public class FlyingMeleeEnemy : MonoBehaviour
 
     IEnumerator attackDelay()
     {
+
+        isSFX = true;
         isAttacking = true;
         yield return new WaitForSeconds(1f);
 
+        sfx.Play();
         anim.Play("Flying Enemy Attack");
         yield return new WaitForSeconds(1.3f);
         isAttacking = false;
+        isSFX = false;
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

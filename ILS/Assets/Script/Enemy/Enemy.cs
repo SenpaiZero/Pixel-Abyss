@@ -16,6 +16,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] private bool bat = false;
     [SerializeField] private bool fireTotem = false;
     [SerializeField] private bool flyingMelee = false;
+    private Animator hitAnim;
 
     [Header("boss")]
     public bool isBoss = false;
@@ -45,9 +46,14 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
+        if (!isBoss)
+        {
+            hitAnim = GetComponent<Animator>();
+        }
         if (isBoss)
         {
             bossMaxHP = enemyHP;
+            hitAnim = GetComponentInChildren<Animator>();
         }
     }
 
@@ -65,6 +71,7 @@ public class Enemy : MonoBehaviour
     public void takeDamage(float ammount, bool isCrit)
     {
         enemyHP -= ammount;
+        hitAnim.Play("hit");
         if (PlayerPrefs.GetInt("isDamage") == 0)
         {
             if (isCrit == false)

@@ -24,6 +24,8 @@ public class BatEnemy : MonoBehaviour
     private float attackTimer = 6f;
     private float timer;
 
+    public AudioSource sfx;
+
     private bool isAlert = false;
     NavMeshAgent agent;
     public SpriteRenderer batRen;
@@ -80,6 +82,7 @@ public class BatEnemy : MonoBehaviour
     IEnumerator delayAttack()
     {
         agent.enabled = false;
+        sfx.Play();
         batRen.color = Color.Lerp(Color.white, Color.red, 10);
         yield return new WaitForSeconds(1f);
         attack();
