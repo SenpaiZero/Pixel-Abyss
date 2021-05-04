@@ -7,6 +7,7 @@ public class BulletScript : MonoBehaviour
     private float wandDamage;
     private AudioSource hitSFX;
     float rand;
+    int aoe = 0;
 
     [SerializeField] private GameObject explosionPrefab;
     private void Awake()
@@ -44,7 +45,7 @@ public class BulletScript : MonoBehaviour
             }
             else
             {
-                collision.GetComponent<Enemy>().takeDamage(wandDamage * 2, true);
+                collision.GetComponent<Enemy>().takeDamage(wandDamage * PlayerPrefs.GetInt("critDamage"), true);
             }
         }
 
@@ -54,7 +55,18 @@ public class BulletScript : MonoBehaviour
         }
         else
         {
-            Destroy(gameObject);
+            if (PlayerPrefs.GetString("bulletAOE") == "true")
+            {
+                aoe++;
+                if (aoe >= 2)
+                {
+                    Destroy(gameObject);
+                }
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
         }
     }
 

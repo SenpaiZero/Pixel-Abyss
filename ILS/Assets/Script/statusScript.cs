@@ -121,7 +121,11 @@ public class statusScript : MonoBehaviour
 
     public void completeAllStageCheat()
     {
-        PlayerPrefs.SetInt("stageUnlocked", 5);
+        PlayerPrefs.SetInt("stage 1", 1);
+        PlayerPrefs.SetInt("stage 2", 1);
+        PlayerPrefs.SetInt("stage 3", 1);
+        PlayerPrefs.SetInt("stage 4", 1);
+        PlayerPrefs.SetInt("stage 5", 1);
         PlayerPrefs.Save();
     }
 
@@ -173,7 +177,11 @@ public class statusScript : MonoBehaviour
         PlayerPrefs.SetFloat("mana", 50);
 
 
-        PlayerPrefs.SetInt("stageUnlocked", 1);
+        PlayerPrefs.SetInt("stage 1", 0);
+        PlayerPrefs.SetInt("stage 2", 0);
+        PlayerPrefs.SetInt("stage 3", 0);
+        PlayerPrefs.SetInt("stage 4", 0);
+        PlayerPrefs.SetInt("stage 5", 0);
         PlayerPrefs.Save();
     }
 

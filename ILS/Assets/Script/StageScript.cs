@@ -30,7 +30,7 @@ public class StageScript : MonoBehaviour
     {
         if (isManager == true)
         {
-            stageNum(PlayerPrefs.GetInt("stageUnlocked"));
+            stageNum();
 
         }
     }
@@ -41,47 +41,23 @@ public class StageScript : MonoBehaviour
         GameObject.FindGameObjectWithTag("MenuSfx").GetComponent<menuSFX>().menuSound();
     }
 
-    private void stageNum(int stageNum)
+    private void stageNum()
     {
-        if (stageNum >= 1)
-        {
-            stage1.interactable = true;
-        }
-        if (stageNum >= 2)
+        if (PlayerPrefs.GetInt("stage 2") == 1)
         {
             stage2.interactable = true;
         }
-        if (stageNum >= 3)
+        if (PlayerPrefs.GetInt("stage 3") == 1)
         {
             stage3.interactable = true;
         }
-        if (stageNum >= 4)
+        if (PlayerPrefs.GetInt("stage 4") == 1)
         {
             stage4.interactable = true;
         }
-        if (stageNum >= 5)
+        if (PlayerPrefs.GetInt("stage 5") == 1)
         {
             stage5.interactable = true;
-        }
-        if (stageNum >= 6)
-        {
-            stage6.interactable = true;
-        }
-        if (stageNum >= 7)
-        {
-            stage7.interactable = true;
-        }
-        if (stageNum >= 8)
-        {
-            stage8.interactable = true;
-        }
-        if (stageNum >= 9)
-        {
-            stage9.interactable = true;
-        }
-        if (stageNum >= 10)
-        {
-            stage10.interactable = true;
         }
     }
 

@@ -39,6 +39,7 @@ public class BatEnemy : MonoBehaviour
 
     void Update()
     {
+        sfx.volume = (PlayerPrefs.GetFloat("sfxValue") / 100);
         float Dist = Vector3.Distance(player.transform.position, this.transform.position);
         float alertDis = Dist;
         timer += Time.deltaTime;

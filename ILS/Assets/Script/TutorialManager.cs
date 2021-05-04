@@ -63,7 +63,7 @@ public class TutorialManager : MonoBehaviour
                 tutorialText.text = "Use the joystick on the left side of the screen to move around.";
                 break;
             case 2:
-                tutorialText.text = "Great! now go to the skeleton and use your skills to kill him. Don't worry he is sleeping";
+                tutorialText.text = "Great! now go to the skeleton and use your skills to kill him. Don't worry he is sleeping \n<color=orange> NOTE: Attacks are auto aimed</color>";
                 break;
             case 3:
                 tutorialText.text = "Goodjob! I'm Giving you 5 skill points since you followed my instruction. Use it on the magic circle to level up your skills";
@@ -126,7 +126,7 @@ public class TutorialManager : MonoBehaviour
     IEnumerator moveTut()
     {
         isContinue = true;
-        yield return new WaitForSeconds(3f);
+        yield return new WaitForSeconds(2f);
         isClose = false;
         
     }

@@ -62,6 +62,7 @@ public class Player : MonoBehaviour
     private bool isAllEnemyDead = false;
     private bool isHpRegen = false;
     private bool isManaRegen = false;
+    private bool isShooting = false;
     private void Awake()
     {
 
@@ -216,6 +217,12 @@ public class Player : MonoBehaviour
         {
             mana = PlayerPrefs.GetFloat("mana");
         }
+
+        //movement
+        if(isTeleporting == true || isShooting == true)
+        {
+            
+        }
     }
     public void FixedUpdate()
     {
@@ -223,7 +230,7 @@ public class Player : MonoBehaviour
         if (variableJoystick.Horizontal <= -0.4f || variableJoystick.Vertical <= -0.4f ||
             variableJoystick.Horizontal >= 0.4f || variableJoystick.Vertical >= 0.4f)
         {
-            if (isTeleporting == true)
+            if (isTeleporting == true || isShooting == true)
             {
                 rb.velocity = Vector3.zero;
             }
@@ -272,18 +279,39 @@ public class Player : MonoBehaviour
 
     public void shoot()
     {
+        StartCoroutine(shootDelay());
+    }
+
+    IEnumerator shootDelay()
+    {
         if (atkTimer >= PlayerPrefs.GetFloat("attackSpeed"))
         {
+            isShooting = true;
             shootSFX.Play();
             anim.Play("Attack");
-            GameObject clone = Instantiate(fireball,aimRot.transform.position, aimRot.transform.rotation);
+            GameObject clone = Instantiate(fireball, aimRot.transform.position, aimRot.transform.rotation);
             Rigidbody2D crb = clone.GetComponent<Rigidbody2D>();
             crb.AddForce(aimPos.right * PlayerPrefs.GetFloat("magicSpeed"), ForceMode2D.Impulse);
             crb.velocity = Vector2.ClampMagnitude(crb.velocity, PlayerPrefs.GetFloat("magicSpeed"));
-            Destroy(clone, 10f);
+            Destroy(clone, 15f);
+
+            yield return new WaitForSeconds(0.2f);
+            if (PlayerPrefs.GetString("doubleShot") == "true")
+            {
+                GameObject clone2 = Instantiate(fireball, aimRot.transform.position, aimRot.transform.rotation);
+                Rigidbody2D crb2 = clone2.GetComponent<Rigidbody2D>();
+                crb2.AddForce(aimPos.right * PlayerPrefs.GetFloat("magicSpeed"), ForceMode2D.Impulse);
+                crb2.velocity = Vector2.ClampMagnitude(crb2.velocity, PlayerPrefs.GetFloat("magicSpeed"));
+                Destroy(clone2, 15f);
+            }
             atkTimer -= PlayerPrefs.GetFloat("attackSpeed");
 
+
+            yield return new WaitForSeconds(0.15f);
+            isShooting = false;
+
         }
+
     }
 
 
@@ -321,7 +349,7 @@ public class Player : MonoBehaviour
 
     public void playerRestoreMana(float manaPots)
     {
-        mana += manaPots;
+        mana += manaPots; 
         if (PlayerPrefs.GetInt("isMana") == 0)
         {
             GameObject clone = Instantiate(textPopup, new Vector2(transform.position.x, transform.position.y + 2), Quaternion.identity);
@@ -339,6 +367,10 @@ public class Player : MonoBehaviour
         clone.GetComponentInChildren<TextMeshPro>().color = Color.yellow;
         clone.transform.parent = transform.parent;
         Destroy(clone, 3f);
+    }
+
+    public void halfCD()
+    {
     }
 
     //delay function for enemy
@@ -382,7 +414,7 @@ public class Player : MonoBehaviour
     //dash btn
     public void dashBtn()
     {
-        if (mana >= 10)
+        if (mana >= 10 / PlayerPrefs.GetInt("50ManaPercent"))
         {
             if (isTeleportCD == false)
             {
@@ -396,7 +428,7 @@ public class Player : MonoBehaviour
     //Skill Tornado Btn
     public void skillTornadoBtn()
     {
-        if (mana >= 50)
+        if (mana >= 50 / PlayerPrefs.GetInt("50ManaPercent"))
         {
             if (isTornadoCD == false)
             {
@@ -418,65 +450,34 @@ public class Player : MonoBehaviour
 
         if(sceneName == "Stage 1")
         {
-            if (PlayerPrefs.GetInt("stageUnlock") > 1)
+            if(PlayerPrefs.GetInt("stage 2") == 0)
             {
-                PlayerPrefs.SetInt("stageUnlocked", 2);
+                PlayerPrefs.SetInt("stage 2", 1);
+                PlayerPrefs.Save();
             }
         }
         if (sceneName == "Stage 2")
         {
-            if (PlayerPrefs.GetInt("stageUnlock") <= 2)
+            if (PlayerPrefs.GetInt("stage 3") == 0)
             {
-                PlayerPrefs.SetInt("stageUnlocked", 3);
+                PlayerPrefs.SetInt("stage 3", 1);
+                PlayerPrefs.Save();
             }
         }
         if (sceneName == "Stage 3")
         {
-            if (PlayerPrefs.GetInt("stageUnlock") > 3)
+            if (PlayerPrefs.GetInt("stage 4") == 0)
             {
-                PlayerPrefs.SetInt("stageUnlocked", 4);
+                PlayerPrefs.SetInt("stage 4", 1);
+                PlayerPrefs.Save();
             }
         }
         if(sceneName == "Stage 4")
         {
-            if (PlayerPrefs.GetInt("stageUnlock") <= 4)
+            if (PlayerPrefs.GetInt("stage 5") == 0)
             {
-                PlayerPrefs.SetInt("stageUnlocked", 5);
-            }
-        }
-        if(sceneName == "Stage 5")
-        {
-            if (PlayerPrefs.GetInt("stageUnlock") <= 5)
-            {
-                PlayerPrefs.SetInt("stageUnlocked", 6);
-            }
-        }
-        if(sceneName == "Stage 6")
-        {
-            if (PlayerPrefs.GetInt("stageUnlock") <= 6)
-            {
-                PlayerPrefs.SetInt("stageUnlocked", 7);
-            }
-        }
-        if(sceneName == "Stage 7")
-        {
-            if (PlayerPrefs.GetInt("stageUnlock") <= 7)
-            {
-                PlayerPrefs.SetInt("stageUnlocked", 8);
-            }
-        }
-        if(sceneName == "Stage 8")
-        {
-            if (PlayerPrefs.GetInt("stageUnlock") <= 8)
-            {
-                PlayerPrefs.SetInt("stageUnlocked", 9);
-            }
-        }
-        if(sceneName == "Stage 9")
-        {
-            if (PlayerPrefs.GetInt("stageUnlock") <= 9)
-            {
-                PlayerPrefs.SetInt("stageUnlocked", 10);
+                PlayerPrefs.SetInt("stage 5", 1);
+                PlayerPrefs.Save();
             }
         }
     }
@@ -506,7 +507,7 @@ public class Player : MonoBehaviour
 
     IEnumerator playerDash()
     {
-        mana -= 10;
+        mana -= 10 / PlayerPrefs.GetInt("50ManaPercent");
         tpSFX.Play();
         isTeleporting = true;
         anim.Play("TP animation V2");
@@ -529,7 +530,7 @@ public class Player : MonoBehaviour
 
     IEnumerator playerSkill()
     {
-        mana -= 50f;
+        mana -= 50f / PlayerPrefs.GetInt("50ManaPercent");
         GameObject clone = Instantiate(prefabTornado, aimRot.transform.position, Quaternion.identity);
         Rigidbody2D crb1 = clone.GetComponent<Rigidbody2D>();
         crb1.AddForce(aimPos.right * 3f, ForceMode2D.Impulse);

@@ -45,11 +45,9 @@ ScriptsOnlyBuild:
     - UnityEditor.U2D.Animation.BoneGizmo
     Unity.2D.Tilemap.Editor.dll:
     - UnityEditor.Tilemaps.GridBrush
-    - UnityEditor.Tilemaps.GridPaintPaletteClipboard
-    - UnityEditor.Tilemaps.GridPaintPaletteWindow
     - UnityEditor.Tilemaps.GridPaintingState
     - UnityEditor.Tilemaps.GridPaletteBrushes
-    - UnityEditor.Tilemaps.PaintableSceneViewGrid
+    - UnityEditor.Tilemaps.GridPalettes
     - UnityEditor.Tilemaps.SceneViewGridManager
     - UnityEditor.Tilemaps.TileDragAndDropManager
     Unity.2D.Tilemap.Extras.Editor.dll:
@@ -99,8 +97,6 @@ ScriptsOnlyBuild:
     - UnityEngine.Rendering.Universal.UniversalRenderPipelineAsset
     Unity.Rider.Editor.dll:
     - Packages.Rider.Editor.UnitTesting.CallbackData
-    Unity.ShaderGraph.Editor.dll:
-    - UnityEditor.ShaderGraph.Drawing.MaterialGraphEditWindow
     Unity.TextMeshPro.dll:
     - TMPro.TMP_FontAsset
     - TMPro.TMP_Settings
@@ -111,9 +107,10 @@ ScriptsOnlyBuild:
     UnityEditor.Graphs.dll:
     - UnityEditor.Graphs.AnimationBlendTree.Graph
     - UnityEditor.Graphs.AnimationBlendTree.GraphGUI
+    - UnityEditor.Graphs.AnimationStateMachine.AnyStateNode
     - UnityEditor.Graphs.AnimationStateMachine.Graph
     - UnityEditor.Graphs.AnimationStateMachine.GraphGUI
-    - UnityEditor.Graphs.AnimatorControllerTool
+    - UnityEditor.Graphs.AnimationStateMachine.StateNode
     UnityEditor.TestRunner.dll:
     - UnityEditor.TestTools.TestRunner.Api.CallbacksHolder
     - UnityEditor.TestTools.TestRunner.TestListCacheData
@@ -1638,7 +1635,7 @@ ScriptsOnlyBuild:
     className: Image
   - hash:
       serializedVersion: 2
-      Hash: 1e09299abf09829440c0cbea2316277f
+      Hash: 5413dcb289c44ddfd5f6972e93b4a8aa
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: FlyingMeleeEnemy
@@ -1686,7 +1683,7 @@ ScriptsOnlyBuild:
     className: skillPopup
   - hash:
       serializedVersion: 2
-      Hash: 7b57f958c310a2266388aa2c8ad7d93f
+      Hash: ca4eb29c4139fb5e08389b07ec7a83fc
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: LittleRange
@@ -2034,7 +2031,7 @@ ScriptsOnlyBuild:
     className: helpScript
   - hash:
       serializedVersion: 2
-      Hash: 1e09299abf09829440c0cbea2316277f
+      Hash: 5413dcb289c44ddfd5f6972e93b4a8aa
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: skeletonEnemy
@@ -2112,7 +2109,7 @@ ScriptsOnlyBuild:
     className: BoarEnemy
   - hash:
       serializedVersion: 2
-      Hash: c067046c0268b92a1f6c37d04e30d349
+      Hash: cc0d7016dd206a86daf06d98c0d1451a
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: MenuScript
@@ -2310,7 +2307,7 @@ ScriptsOnlyBuild:
     className: ActivationPlayableAsset
   - hash:
       serializedVersion: 2
-      Hash: 2789564572a64a06e1db65c130409fef
+      Hash: 8c3f9df7f219cdd94e3fc2917e2a05a6
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: BatEnemy
@@ -2586,7 +2583,7 @@ ScriptsOnlyBuild:
     className: AmbientOcclusion
   - hash:
       serializedVersion: 2
-      Hash: 82c62e4534802375c4c32deba147c572
+      Hash: 408eb2a9bce801aba1cdb162dfdedd1d
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: FireTotemEnemy
@@ -2750,4 +2747,4 @@ ScriptsOnlyBuild:
   - Assets/Scenes/Stage 4.unity
   - Assets/Scenes/Stage 5.unity
   - Assets/Scenes/TutorialScene.unity
-  playerPath: C:/Users/Santos/Desktop/Pixel Abyss v4.apk
+  playerPath: C:/Users/Santos/Desktop/Pixel Abyss v6.apk

@@ -82,4 +82,10 @@ public class helpScript : MonoBehaviour
     {
         this.GetComponent<menuSFX>().menuSound();
     }
+
+    public void linkFunc()
+    {
+        sfxMenu();
+        Application.OpenURL("https://github.com/SenpaiZero/Pixel-Abyss");
+    }
 }

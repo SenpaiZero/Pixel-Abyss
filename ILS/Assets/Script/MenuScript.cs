@@ -11,6 +11,7 @@ public class MenuScript : MonoBehaviour
     public GameObject helpMenu;
     public GameObject optionMenu;
     public GameObject okAnnBtn;
+    public GameObject announcement;
     [Space]
     [Header("SOUNDS")]
     [SerializeField]private Slider musicSlider;
@@ -149,6 +150,11 @@ public class MenuScript : MonoBehaviour
     {
         tutorial.SetActive(true);
         sfxMenu();
+
+        if(announcement!=null)
+        {
+            Destroy(announcement);
+        }
     }
 
     public void _optionMenu()

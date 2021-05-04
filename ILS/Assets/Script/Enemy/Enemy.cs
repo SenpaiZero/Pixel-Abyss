@@ -85,7 +85,7 @@ public class Enemy : MonoBehaviour
             else
             {
                 GameObject clone = Instantiate(dmgTextObj, textPos.position, Quaternion.identity);
-                clone.GetComponentInChildren<TextMeshPro>().text = "" + ammount.ToString("F0");
+                clone.GetComponentInChildren<TextMeshPro>().text = "CRIT!! \n" + ammount.ToString("F0");
                 clone.transform.parent = transform.parent;
                 clone.GetComponentInChildren<TextMeshPro>().color = Color.red;
                 Destroy(clone, 3f);
@@ -105,11 +105,13 @@ public class Enemy : MonoBehaviour
     {
         if (isBoss == false)
         {
+            getManaPerKill();
             GameObject clone = Instantiate(coins, transform.position, Quaternion.identity);
             Destroy(clone, 20f);
             exp();
             enemyList.Remove(this);
             Destroy(gameObject);
+
         }
         else
         {
@@ -119,6 +121,14 @@ public class Enemy : MonoBehaviour
             //instantiate treasure chest
         }
 
+    }
+
+    void getManaPerKill()
+    {
+        if(PlayerPrefs.GetString("manaPerKill") == "true")
+        {
+            GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().playerRestoreMana(5);
+        }
     }
 
     void exp()

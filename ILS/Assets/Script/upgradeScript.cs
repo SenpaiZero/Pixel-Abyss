@@ -81,15 +81,15 @@ public class upgradeScript : MonoBehaviour
         infoArr[2] = "<color=#e64141>power \n level 10</color> \n Shoots 2 bullets instead of 1";
         infoArr[3] = "<color=#e64141>power \n level 15</color> \n bullets can go through 2 enemies";
         //magic
-        infoArr[4] = "<color=#003e7c>magic \n level 5</color> \n Drinking Potions halves the cooldown of the skills";
-        infoArr[5] = "<color=#003e7c>magic \n level 10</color> \n Killing enemy gives you 1% mana";
+        infoArr[4] = "<color=#003e7c>magic \n level 5</color> \n Double the effect of potions";
+        infoArr[5] = "<color=#003e7c>magic \n level 10</color> \n Killing enemy gives you 5 mana";
         infoArr[6] = "<color=#003e7c>magic \n level 15</color> \n Reduces mana consumption to 50%";
         //vitality
         infoArr[7] = "<color=#000000>vitality \n level 5</color> \n Killing enemy gives you gives you 1% health";
         infoArr[8] = "<color=#000000>vitality \n level 10</color> \n Reduces damage taken by 30%";
         infoArr[9] = "<color=#000000>vitality \n level 15</color> \n You have 30% chance blocking an attack";
         //haste
-        infoArr[10] = "<color=#56a811>haste \n level 5</color> \n 2 times movement speed when out of combat";
+        infoArr[10] = "<color=#56a811>haste \n level 5</color> \n 50% more movement speed";
         infoArr[11] = "<color=#56a811>haste \n level 10</color> \n Gain 50% movement speed after using skill for 2 seconds";
         infoArr[12] = "<color=#56a811>haste \n level 15</color> \n Immune to all slow effects";
         //greed
@@ -212,10 +212,29 @@ public class upgradeScript : MonoBehaviour
             {
                 sfxMenu();
                 PlayerPrefs.SetFloat("wandDamage", PlayerPrefs.GetFloat("wandDamage") + 5f);
-                PlayerPrefs.SetFloat("critChance", PlayerPrefs.GetFloat("critChance") + 2f); //2% max is 30%
+                PlayerPrefs.SetFloat("critChance", PlayerPrefs.GetFloat("critChance") + 2f * PlayerPrefs.GetFloat("critChanceMul")); //2% max is 30%
                 PlayerPrefs.SetInt("powerLevel", PlayerPrefs.GetInt("powerLevel") + 1);
                 PlayerPrefs.SetInt("skillPoints", PlayerPrefs.GetInt("skillPoints") - 1);
                 PlayerPrefs.SetInt("skillSpent", PlayerPrefs.GetInt("skillSpent") + 1);
+
+                //lvl5
+                if(PlayerPrefs.GetInt("powerLevel") >= 5)
+                {
+                    PlayerPrefs.SetInt("critDamage", 3);
+                    PlayerPrefs.SetFloat("critChanceMul", 2);
+                }
+
+                //lvl10
+                if(PlayerPrefs.GetInt("powerLevel") >= 10)
+                {
+                    PlayerPrefs.SetString("doubleShot", "true");
+                }
+
+                //lvl15
+                if(PlayerPrefs.GetInt("powerLevel") >= 10)
+                {
+                    PlayerPrefs.SetString("bulletAOE", "true");
+                }
                 PlayerPrefs.Save();
             }
             else
@@ -239,6 +258,25 @@ public class upgradeScript : MonoBehaviour
                 PlayerPrefs.SetInt("magicLevel", PlayerPrefs.GetInt("magicLevel") + 1);
                 PlayerPrefs.SetInt("skillPoints", PlayerPrefs.GetInt("skillPoints") - 1);
                 PlayerPrefs.SetInt("skillSpent", PlayerPrefs.GetInt("skillSpent") + 1);
+
+                //level 5
+                if(PlayerPrefs.GetInt("magicLevel") >= 5)
+                {
+                    PlayerPrefs.SetFloat("doublePots", 2);
+                }
+
+                //level 10
+                if(PlayerPrefs.GetInt("magicLevel") >= 10)
+                {
+                    PlayerPrefs.SetString("manaPerKill", "true");
+                }
+
+                //level 15
+                if(PlayerPrefs.GetInt("magicLevel") >= 15)
+                {
+                    PlayerPrefs.SetInt("50ManaPercent", 2);
+                }
+
                 PlayerPrefs.Save();
             }
             else
@@ -358,6 +396,17 @@ public class upgradeScript : MonoBehaviour
         hasteBtn.interactable = true;
         vitalityBtn.interactable = true;
         greedBtn.interactable = true;
+
+        //Power Level 5,10,15
+        PlayerPrefs.SetInt("critDamage", 2);
+        PlayerPrefs.SetFloat("critChanceMul", 1);
+        PlayerPrefs.SetString("doubleshot", "false");
+        PlayerPrefs.SetString("bulletAOE", "false");
+
+        //magic level 5,10,15
+        PlayerPrefs.SetFloat("doublePots", 1);
+        PlayerPrefs.SetString("manaPerKill", "false");
+        PlayerPrefs.SetInt("50ManaPercent", 1);
     }
 
     void sfxMenu()

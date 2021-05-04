@@ -31,6 +31,7 @@ public class skeletonEnemy : MonoBehaviour
 
     void Update()
     {
+        sfx.volume = (PlayerPrefs.GetFloat("sfxValue") / 100); 
         Dist = Vector3.Distance(player.transform.position, this.transform.position);
         float alertDis = Dist;
 

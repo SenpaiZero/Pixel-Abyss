@@ -33,7 +33,7 @@
 About The Project
 </h2>
 HI! My Name is Ygi Martin B. Santos, Im 18 years old student who is currently
-learning game development. I Made this game within 1 month and this is my first complete game.
+learning game development. I Made this game within 3 months and this is my first complete game.
 
 I made this game for my school project for android platform and to learn new 
 techniques about cleaner codes, Global Variables, Saving Data, Shaders, Pixel Arts and Complicated Logics.

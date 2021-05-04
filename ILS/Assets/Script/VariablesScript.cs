@@ -81,7 +81,11 @@ public class VariablesScript : MonoBehaviour
             PlayerPrefs.SetInt("extraCoins", 1);
             PlayerPrefs.SetFloat("extraEXP", 1);
 
-            PlayerPrefs.SetInt("stageUnlocked", 1);
+            PlayerPrefs.SetInt("stage 1", 0);
+            PlayerPrefs.SetInt("stage 2", 0);
+            PlayerPrefs.SetInt("stage 3", 0);
+            PlayerPrefs.SetInt("stage 4", 0);
+            PlayerPrefs.SetInt("stage 5", 0);
 
             PlayerPrefs.Save();
 
@@ -96,12 +100,20 @@ public class VariablesScript : MonoBehaviour
             PlayerPrefs.SetFloat("musicValue", 50);
             PlayerPrefs.SetFloat("sfxValue", 50);
 
-            //powerLevel
+            //skill
             PlayerPrefs.SetInt("powerLevel", powerLevel);
             PlayerPrefs.SetInt("magicLevel", magicLevel);
             PlayerPrefs.SetInt("hasteLevel", hasteLevel);
             PlayerPrefs.SetInt("vitalityLevel", vitalityLevel);
             PlayerPrefs.SetInt("greedLevel", greedLevel);
+
+            //powerlevel
+            PlayerPrefs.SetFloat("critChanceMul", 1);
+            PlayerPrefs.SetInt("critDamage", 2);
+
+            //magic level
+            PlayerPrefs.SetInt("50ManaPercent", 1);
+            PlayerPrefs.SetFloat("doublePots", 1);
 
             //saving first run
             PlayerPrefs.SetInt("firstRun", firstRun + 5);
