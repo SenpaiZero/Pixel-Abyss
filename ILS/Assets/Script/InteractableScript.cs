@@ -105,11 +105,17 @@ public class InteractableScript : MonoBehaviour
 
     public void marketClose()
     {
+        menuSFX();
         marketPopup.SetActive(false);
     }
 
     public void closeStage()
     {
+        menuSFX();
         caveObj.SetActive(false);
+    }
+    void menuSFX()
+    {
+        GameObject.FindGameObjectWithTag("MenuSfx").GetComponent<menuSFX>().menuSound();
     }
 }

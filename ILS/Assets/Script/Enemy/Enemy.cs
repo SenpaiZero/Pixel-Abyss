@@ -106,6 +106,7 @@ public class Enemy : MonoBehaviour
         if (isBoss == false)
         {
             getManaPerKill();
+            getHealthPerKill();
             GameObject clone = Instantiate(coins, transform.position, Quaternion.identity);
             Destroy(clone, 20f);
             exp();
@@ -128,6 +129,14 @@ public class Enemy : MonoBehaviour
         if(PlayerPrefs.GetString("manaPerKill") == "true")
         {
             GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().playerRestoreMana(5);
+        }
+    }
+
+    void getHealthPerKill()
+    {
+        if(PlayerPrefs.GetString("HPperKill") == "true")
+        {
+            GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().playerRestoreHP(5);
         }
     }
 

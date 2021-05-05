@@ -85,9 +85,9 @@ public class upgradeScript : MonoBehaviour
         infoArr[5] = "<color=#003e7c>magic \n level 10</color> \n Killing enemy gives you 5 mana";
         infoArr[6] = "<color=#003e7c>magic \n level 15</color> \n Reduces mana consumption to 50%";
         //vitality
-        infoArr[7] = "<color=#000000>vitality \n level 5</color> \n Killing enemy gives you gives you 1% health";
+        infoArr[7] = "<color=#000000>vitality \n level 5</color> \n Killing enemy gives you gives you 5 health";
         infoArr[8] = "<color=#000000>vitality \n level 10</color> \n Reduces damage taken by 30%";
-        infoArr[9] = "<color=#000000>vitality \n level 15</color> \n You have 30% chance blocking an attack";
+        infoArr[9] = "<color=#000000>vitality \n level 15</color> \n You have 20% chance blocking an attack";
         //haste
         infoArr[10] = "<color=#56a811>haste \n level 5</color> \n 50% more movement speed";
         infoArr[11] = "<color=#56a811>haste \n level 10</color> \n Gain 50% movement speed after using skill for 2 seconds";
@@ -101,7 +101,7 @@ public class upgradeScript : MonoBehaviour
                             "<color=#000000>vitality</color> - EACH LEVEL GIVES YOU 10 HEALTH AND 0.5 HEALTH REGEN \n" +
                             "<color=#003e7c>magic</color> - EACH LEVEL GIVES YOU 3% COOLDOWN REDUCTION, 10 MANA AND 0.5 MANA REGEN \n" +
                             "<color=#56a811>haste</color> - EACH LEVEL GIVES YOU 6% ATTACK SPEED and 3% MOVEMENT SPEED \n" +
-                            "<color=#e6aa1f>greed</color> - EACH LEVEL GIVES YOU EXTRA 5 % COINS AND 5% EXTRA EXP \n" +
+                            "<color=#e6aa1f>greed</color> - EACH LEVEL GIVES YOU EXTRA 5% COINS AND 5% EXTRA EXP \n" +
                             "<color=yellow> CLICK ON ICON OF SKILL TO LEARN MORE ABOUT THEM </color>";
     }
 
@@ -321,6 +321,22 @@ public class upgradeScript : MonoBehaviour
                 PlayerPrefs.SetInt("vitalityLevel", PlayerPrefs.GetInt("vitalityLevel") + 1);
                 PlayerPrefs.SetInt("skillPoints", PlayerPrefs.GetInt("skillPoints") - 1);
                 PlayerPrefs.SetInt("skillSpent", PlayerPrefs.GetInt("skillSpent") + 1);
+
+                //lvl5
+                if(PlayerPrefs.GetInt("vitalityLevel") >= 5)
+                {
+                    PlayerPrefs.SetString("HPperKill", "true");
+                }
+                //lvl10
+                if(PlayerPrefs.GetInt("vitalityLevel") >= 10)
+                {
+                    PlayerPrefs.SetFloat("damageReduction", 3); //30%
+                }
+                //lvl15
+                if(PlayerPrefs.GetInt("vitalityLevel") >= 15)
+                {
+                    PlayerPrefs.SetString("blockDamage", "true");
+                }
                 PlayerPrefs.Save();
             }
             else
@@ -407,6 +423,11 @@ public class upgradeScript : MonoBehaviour
         PlayerPrefs.SetFloat("doublePots", 1);
         PlayerPrefs.SetString("manaPerKill", "false");
         PlayerPrefs.SetInt("50ManaPercent", 1);
+
+        //vitality level 5,10,15
+        PlayerPrefs.SetString("HPperKill", "false");
+        PlayerPrefs.SetFloat("damageReduction", 1);
+        PlayerPrefs.SetString("blockDamage", "false");
     }
 
     void sfxMenu()

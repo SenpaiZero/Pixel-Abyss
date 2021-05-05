@@ -318,19 +318,40 @@ public class Player : MonoBehaviour
     //take damage when hit
     public void playerTakeDamage(float ammount)
     {
-        health -= ammount;
-        if (PlayerPrefs.GetInt("isDamageInd") == 0)
+        int rand = 50;
+        if (PlayerPrefs.GetString("blockDamage") == "true")
         {
-            GameObject clone = Instantiate(textPopup, new Vector2(transform.position.x, transform.position.y + 2), Quaternion.identity);
-            clone.GetComponentInChildren<TextMeshPro>().text = "" + ammount.ToString("F0");
-            clone.GetComponentInChildren<TextMeshPro>().color = Color.red;
-            clone.transform.parent = transform.parent;
-            Destroy(clone, 3f);
+            rand = Random.Range(0, 100);
         }
 
-        if (health <= 0)
+        if (rand >= 20)
         {
-            dead();
+            if (PlayerPrefs.GetFloat("damageReduction") != 1)
+            {
+                ammount = ammount - (ammount / PlayerPrefs.GetFloat("damageReduction"));
+            }
+            health -= ammount;
+            if (PlayerPrefs.GetInt("isDamageInd") == 0)
+            {
+                GameObject clone = Instantiate(textPopup, new Vector2(transform.position.x, transform.position.y + 2), Quaternion.identity);
+                clone.GetComponentInChildren<TextMeshPro>().text = "" + ammount.ToString("F0");
+                clone.GetComponentInChildren<TextMeshPro>().color = Color.red;
+                clone.transform.parent = transform.parent;
+                Destroy(clone, 3f);
+            }
+
+            if (health <= 0)
+            {
+                dead();
+            }
+        }
+        else if(rand < 20)
+        {
+            GameObject clone1 = Instantiate(textPopup, new Vector2(transform.position.x, transform.position.y + 2), Quaternion.identity);
+            clone1.GetComponentInChildren<TextMeshPro>().text = "BLOCK!";
+            clone1.GetComponentInChildren<TextMeshPro>().color = Color.gray;
+            clone1.transform.parent = transform.parent;
+            Destroy(clone1, 3f);
         }
     }
 
