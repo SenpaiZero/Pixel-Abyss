@@ -28,15 +28,29 @@ public class PotionScript : MonoBehaviour
 
     public void hpPots()
     {
-        if(isCD_HP == false && PlayerPrefs.GetInt("hpPots") >= 1)
+        if (PlayerPrefs.GetString("infinitePots") == "false")
+        {
+            if (isCD_HP == false && PlayerPrefs.GetInt("hpPots") >= 1)
+            {
+                StartCoroutine("hpPots_");
+            }
+        }
+        else if(isCD_HP == false)
         {
             StartCoroutine("hpPots_");
-        } 
+        }
     }
 
     public void mpPots()
     {
-        if(isCD_MP == false && PlayerPrefs.GetInt("manaPots") >= 1)
+        if (PlayerPrefs.GetString("infinitePots") == "false")
+        {
+            if (isCD_MP == false && PlayerPrefs.GetInt("manaPots") >= 1)
+            {
+                StartCoroutine("manaPots_");
+            }
+        }
+        else if (isCD_MP == false)
         {
             StartCoroutine("manaPots_");
         }
@@ -44,27 +58,50 @@ public class PotionScript : MonoBehaviour
 
     IEnumerator hpPots_()
     {
-        isCD_HP = true;
-        PlayerPrefs.SetInt("hpPots", PlayerPrefs.GetInt("hpPots") - 1);
-        PlayerPrefs.Save();
-        player.GetComponent<Player>().playerRestoreHP(20 * PlayerPrefs.GetFloat("doublePots"));
-        hpImg.color = Color.black;
-        yield return new WaitForSeconds(2f);
-        hpImg.color = Color.white;
-        isCD_HP = false;
-        
+        if (PlayerPrefs.GetString("infinitePots") == "false")
+        {
+            isCD_HP = true;
+            PlayerPrefs.SetInt("hpPots", PlayerPrefs.GetInt("hpPots") - 1);
+            PlayerPrefs.Save();
+            player.GetComponent<Player>().playerRestoreHP(20 * PlayerPrefs.GetFloat("doublePots"));
+            hpImg.color = Color.black;
+            yield return new WaitForSeconds(2f);
+            hpImg.color = Color.white;
+            isCD_HP = false;
+        }
+        else
+        {
+            isCD_HP = true;
+            player.GetComponent<Player>().playerRestoreHP(20 * PlayerPrefs.GetFloat("doublePots"));
+            hpImg.color = Color.black;
+            yield return new WaitForSeconds(6f);
+            hpImg.color = Color.white;
+            isCD_HP = false;
+        }
     }
     
     IEnumerator manaPots_()
     {
-        isCD_MP = true;
-        PlayerPrefs.SetInt("manaPots", PlayerPrefs.GetInt("manaPots") - 1);
-        PlayerPrefs.Save();
-        player.GetComponent<Player>().playerRestoreMana(20 * PlayerPrefs.GetFloat("doublePots"));
-        mpImg.color = Color.black;
-        yield return new WaitForSeconds(2f);
-        mpImg.color = Color.white;
-        isCD_MP = false;
+        if (PlayerPrefs.GetString("infinitePots") == "false")
+        {
+            isCD_MP = true;
+            PlayerPrefs.SetInt("manaPots", PlayerPrefs.GetInt("manaPots") - 1);
+            PlayerPrefs.Save();
+            player.GetComponent<Player>().playerRestoreMana(20 * PlayerPrefs.GetFloat("doublePots"));
+            mpImg.color = Color.black;
+            yield return new WaitForSeconds(2f);
+            mpImg.color = Color.white;
+            isCD_MP = false;
+        }
+        else
+        {
+            isCD_MP = true;
+            player.GetComponent<Player>().playerRestoreMana(20 * PlayerPrefs.GetFloat("doublePots"));
+            mpImg.color = Color.black;
+            yield return new WaitForSeconds(6f);
+            mpImg.color = Color.white;
+            isCD_MP = false;
+        }
         
     }
 }

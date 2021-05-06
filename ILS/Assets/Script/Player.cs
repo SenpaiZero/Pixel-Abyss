@@ -236,7 +236,8 @@ public class Player : MonoBehaviour
             }
             else
             {
-                rb.velocity = new Vector2(variableJoystick.Horizontal * speed, variableJoystick.Vertical * speed);
+                rb.velocity = new Vector2(variableJoystick.Horizontal * (PlayerPrefs.GetFloat("killSpeedBonus") * (speed * PlayerPrefs.GetFloat("bonusMovement"))),
+                    variableJoystick.Vertical * (PlayerPrefs.GetFloat("killSpeedBonus") * (speed * PlayerPrefs.GetFloat("bonusMovement"))));
             }
         }
         else
@@ -326,6 +327,7 @@ public class Player : MonoBehaviour
 
         if (rand >= 20)
         {
+            print(ammount);
             if (PlayerPrefs.GetFloat("damageReduction") != 1)
             {
                 ammount = ammount - (ammount / PlayerPrefs.GetFloat("damageReduction"));
@@ -417,8 +419,11 @@ public class Player : MonoBehaviour
         {
             deadCanvas = GameObject.FindGameObjectWithTag("deadCanvas");
             deadCanvas.GetComponent<Animator>().Play("DeadAnim");
-            PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") - lostCoins);
-            PlayerPrefs.SetFloat("EXP", PlayerPrefs.GetFloat("EXP") - lostExp);
+            if (PlayerPrefs.GetString("loseItemOnDead") != "false")
+            {
+                PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") - lostCoins);
+                PlayerPrefs.SetFloat("EXP", PlayerPrefs.GetFloat("EXP") - lostExp);
+            }
             isDead2 = true;
         }
 

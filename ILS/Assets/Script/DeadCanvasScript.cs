@@ -21,7 +21,14 @@ public class DeadCanvasScript : MonoBehaviour
         lostCoins = player.GetComponent<Player>().lostCoins;
         lostExp = player.GetComponent<Player>().lostExp;
 
-        lostTxt.text = "YOU LOST \n" + lostCoins + " Coins \n" + lostExp.ToString("0") + " Experience";
+        if (PlayerPrefs.GetString("loseItemOnDead") != "false")
+        {
+            lostTxt.text = "YOU LOST \n" + lostCoins + " Coins \n" + lostExp.ToString("0") + " Experience";
+        }
+        else
+        {
+            lostTxt.text = "YOU LOST \n" + "NOTHING!";
+        }
     }
 
     public void _restartBtn()

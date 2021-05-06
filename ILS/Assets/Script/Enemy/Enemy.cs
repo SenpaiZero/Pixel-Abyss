@@ -107,11 +107,14 @@ public class Enemy : MonoBehaviour
         {
             getManaPerKill();
             getHealthPerKill();
+            StartCoroutine(speedPerKill());
             GameObject clone = Instantiate(coins, transform.position, Quaternion.identity);
             Destroy(clone, 20f);
             exp();
             enemyList.Remove(this);
-            Destroy(gameObject);
+            this.GetComponent<SpriteRenderer>().enabled = false;
+            this.GetComponent<Collider2D>().enabled = false;
+            Destroy(gameObject, 3f);
 
         }
         else
@@ -138,6 +141,13 @@ public class Enemy : MonoBehaviour
         {
             GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().playerRestoreHP(5);
         }
+    }
+
+    IEnumerator speedPerKill()
+    {
+        PlayerPrefs.SetFloat("killSpeedBonus", 1.2f);
+        yield return new WaitForSeconds(2f);
+        PlayerPrefs.SetFloat("killSpeedBonus", 1f);
     }
 
     void exp()
@@ -198,6 +208,7 @@ public class Enemy : MonoBehaviour
 
     private void getExp(float exp)
     {
+        exp = (exp * PlayerPrefs.GetInt("doubleDrop"));
         PlayerPrefs.SetFloat("EXP", PlayerPrefs.GetFloat("EXP") + (exp * PlayerPrefs.GetFloat("extraEXP")));
         PlayerPrefs.Save();
     }

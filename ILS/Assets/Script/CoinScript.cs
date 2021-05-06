@@ -21,7 +21,7 @@ public class CoinScript : MonoBehaviour
             sp.enabled = false;
             cr.enabled = false;
             collision.gameObject.GetComponent<Player>().coinPickup(rand);
-            PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") + rand);
+            PlayerPrefs.SetInt("Coins", (PlayerPrefs.GetInt("Coins") + rand) * PlayerPrefs.GetInt("doubleDrop"));
             PlayerPrefs.Save();
 
             Destroy(gameObject, 3f);

@@ -115,6 +115,20 @@ public class VariablesScript : MonoBehaviour
             PlayerPrefs.SetInt("50ManaPercent", 1);
             PlayerPrefs.SetFloat("doublePots", 1);
 
+            //Vitality
+            PlayerPrefs.SetString("HPperKill", "false");
+            PlayerPrefs.SetFloat("damageReduction", 1);
+            PlayerPrefs.SetString("blockDamage", "false");
+
+            //haste
+            PlayerPrefs.SetFloat("bonusMovement", 1f);
+            PlayerPrefs.SetFloat("killSpeedBonus", 1f);
+
+            //greed
+            PlayerPrefs.SetString("loseItemOnDead", "true");
+            PlayerPrefs.SetInt("doubleDrop", 1);
+            PlayerPrefs.SetString("infinitePots", "false");
+
             //saving first run
             PlayerPrefs.SetInt("firstRun", firstRun + 5);
             PlayerPrefs.Save();

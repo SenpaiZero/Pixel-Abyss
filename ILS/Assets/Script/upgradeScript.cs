@@ -14,7 +14,6 @@ public class upgradeScript : MonoBehaviour
     string[] infoArr = new string[16];
     int skillPoints;
     bool isIcon = false;
-    int r = 51, g = 51, b = 51;
 
     [SerializeField] GameObject errorPopup;
     [Space]
@@ -89,8 +88,8 @@ public class upgradeScript : MonoBehaviour
         infoArr[8] = "<color=#000000>vitality \n level 10</color> \n Reduces damage taken by 30%";
         infoArr[9] = "<color=#000000>vitality \n level 15</color> \n You have 20% chance blocking an attack";
         //haste
-        infoArr[10] = "<color=#56a811>haste \n level 5</color> \n 50% more movement speed";
-        infoArr[11] = "<color=#56a811>haste \n level 10</color> \n Gain 50% movement speed after using skill for 2 seconds";
+        infoArr[10] = "<color=#56a811>haste \n level 5</color> \n 20% more movement speed";
+        infoArr[11] = "<color=#56a811>haste \n level 10</color> \n Gain 20% movement speed after using skill for 2 seconds";
         infoArr[12] = "<color=#56a811>haste \n level 15</color> \n Immune to all slow effects";
         //greed
         infoArr[13] = "<color=#e6aa1f>greed \n level 5</color> \n You will not lose coins and exp when you died";
@@ -300,6 +299,25 @@ public class upgradeScript : MonoBehaviour
                 PlayerPrefs.SetInt("hasteLevel", PlayerPrefs.GetInt("hasteLevel") + 1);
                 PlayerPrefs.SetInt("skillPoints", PlayerPrefs.GetInt("skillPoints") - 1);
                 PlayerPrefs.SetInt("skillSpent", PlayerPrefs.GetInt("skillSpent") + 1);
+
+                //lvl5
+                if(PlayerPrefs.GetInt("hasteLevel") >= 5)
+                {
+                    PlayerPrefs.SetFloat("bonusMovement", 1.2f);
+                }
+
+                //lvl10
+                if (PlayerPrefs.GetInt("hasteLevel") >= 10)
+                {
+                    PlayerPrefs.SetString("bonusMovementKillBool", "true");
+                }
+
+                //lvl15
+                if(PlayerPrefs.GetInt("hasteLevel") >= 15)
+                {
+                    PlayerPrefs.SetString("immuneSlow", "true");
+                }
+
                 PlayerPrefs.Save();
             }
             else
@@ -358,6 +376,23 @@ public class upgradeScript : MonoBehaviour
                 PlayerPrefs.SetInt("greedLevel", PlayerPrefs.GetInt("greedLevel") + 1);
                 PlayerPrefs.SetInt("skillPoints", PlayerPrefs.GetInt("skillPoints") - 1);
                 PlayerPrefs.SetInt("skillSpent", PlayerPrefs.GetInt("skillSpent") + 1);
+
+                //level5
+                if(PlayerPrefs.GetInt("greedLevel") >= 5)
+                {
+                    PlayerPrefs.SetString("loseItemOnDead", "false");
+                }
+                //level10
+                if(PlayerPrefs.GetInt("greedLevel") >= 10)
+                {
+                    PlayerPrefs.SetInt("doubleDrop", 2);
+                }
+                //level15
+                if(PlayerPrefs.GetInt("greedLevel") >= 15)
+                {
+                    PlayerPrefs.SetString("infinitePots", "true");
+                }
+
                 PlayerPrefs.Save();
             } else
             {
@@ -428,6 +463,17 @@ public class upgradeScript : MonoBehaviour
         PlayerPrefs.SetString("HPperKill", "false");
         PlayerPrefs.SetFloat("damageReduction", 1);
         PlayerPrefs.SetString("blockDamage", "false");
+
+        //haste level5,10,15
+        PlayerPrefs.SetFloat("bonusMovement", 1f);
+        PlayerPrefs.SetString("bonusMovementKillBool", "false");
+        PlayerPrefs.SetString("immuneSlow", "false");
+
+        //greed level5,10,15
+        PlayerPrefs.SetString("loseItemOnDead", "true");
+        PlayerPrefs.SetInt("doubleDrop", 1);
+        PlayerPrefs.SetString("infinitePots", "false");
+
     }
 
     void sfxMenu()
