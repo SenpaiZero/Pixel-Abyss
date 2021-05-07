@@ -38,6 +38,11 @@ public class QuickMenu : MonoBehaviour
         }
     }
 
+    public void openQuest()
+    {
+        sfxMenu();
+        quest.SetActive(true);
+    }
     public void openStage()
     {
         sfxMenu();

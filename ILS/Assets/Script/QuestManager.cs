@@ -32,6 +32,16 @@ public class QuestManager : MonoBehaviour
     public Button bossKillCountBtn;
     public Button deathCountBtn;
 
+    [Header("BTN IMG QUEST")]
+    public Image mobKillCountImg;
+    public Image coinsCollectedImg;
+    public Image PotionUsedImg;
+    public Image TPskillCountImg;
+    public Image EnergyBallCountImg;
+    public Image fireballCountImg;
+    public Image bossKillCountImg;
+    public Image deathCountImg;
+
     //stats
     [Header("STATS COUNT")]
     public TextMeshProUGUI mobKillCountStat;
@@ -47,6 +57,7 @@ public class QuestManager : MonoBehaviour
     {
         questCount();
         statCount();
+        claimButton();
     }
 
     private void questCount()
@@ -64,71 +75,71 @@ public class QuestManager : MonoBehaviour
         //coins collected
         if(PlayerPrefs.GetInt("coinsCollected") >= 50)
         {
-            mobKillCount.text = "100 / 100";
+            coinsCollected.text = "100 / 100";
         }
         else
         {
-            mobKillCount.text = "" + PlayerPrefs.GetInt("coinsCollected") + " / 100";
+            coinsCollected.text = "" + PlayerPrefs.GetInt("coinsCollected") + " / 100";
         }
 
         //potion used
         if(PlayerPrefs.GetInt("potionUsed") >= 10)
         {
-            mobKillCount.text = "10 / 10";
+            PotionUsed.text = "10 / 10";
         }
         else
         {
-            mobKillCount.text = "" + PlayerPrefs.GetInt("potionUsed") + " / 10";
+            PotionUsed.text = "" + PlayerPrefs.GetInt("potionUsed") + " / 10";
         }
 
         //tp used
         if(PlayerPrefs.GetInt("tpUsed") >= 10)
         {
-            mobKillCount.text = "10 / 10";
+            TPskillCount.text = "10 / 10";
         }
         else
         {
-            mobKillCount.text = "" + PlayerPrefs.GetInt("tpUsed") + " / 10";
+            TPskillCount.text = "" + PlayerPrefs.GetInt("tpUsed") + " / 10";
         }
 
         //energy ball used
         if(PlayerPrefs.GetInt("energyBallUsed") >= 10)
         {
-            mobKillCount.text = "10 / 10";
+            EnergyBallCount.text = "10 / 10";
         }
         else
         {
-            mobKillCount.text = "" + PlayerPrefs.GetInt("energyBallUsed") + " / 10";
+            EnergyBallCount.text = "" + PlayerPrefs.GetInt("energyBallUsed") + " / 10";
         }
 
         //fireball shoot used
         if(PlayerPrefs.GetInt("fireballCount") >= 100)
         {
-            mobKillCount.text = "100 / 100";
+            fireballCount.text = "100 / 100";
         }
         else
         {
-            mobKillCount.text = "" + PlayerPrefs.GetInt("fireballCount") + " / 100";
+            fireballCount.text = "" + PlayerPrefs.GetInt("fireballCount") + " / 100";
         }
 
         //boss kill count
         if(PlayerPrefs.GetInt("bossKilled") >= 5)
         {
-            mobKillCount.text = "5 / 5";
+            bossKillCount.text = "5 / 5";
         }
         else
         {
-            mobKillCount.text = "" + PlayerPrefs.GetInt("bossKilled") + " / 5";
+            bossKillCount.text = "" + PlayerPrefs.GetInt("bossKilled") + " / 5";
         }
 
         //death count
         if(PlayerPrefs.GetInt("deathCount") >= 5)
         {
-            mobKillCount.text = "5 / 5";
+            deathCount.text = "5 / 5";
         }
         else
         {
-            mobKillCount.text = "" + PlayerPrefs.GetInt("deathCount") + " / 5";
+            deathCount.text = "" + PlayerPrefs.GetInt("deathCount") + " / 5";
         }
     }
     private void statCount()
@@ -143,8 +154,137 @@ public class QuestManager : MonoBehaviour
         deathCountStat.text = "" + PlayerPrefs.GetInt("deathCount");
     }
 
+    private void claimButton()
+    {
+        if (PlayerPrefs.GetString("mobKilledDone") == "true")
+        {
+            mobKillCountBtn.interactable = false;
+            mobKillCountImg.color = Color.gray;
+        }
+
+        if (PlayerPrefs.GetString("coinsCollectedDone") == "true")
+        {
+            coinsCollectedBtn.interactable = false;
+            coinsCollectedImg.color = Color.gray;
+        }
+
+        if (PlayerPrefs.GetString("potionUsedDone") == "true")
+        {
+            PotionUsedBtn.interactable = false;
+            PotionUsedImg.color = Color.gray;
+        }
+
+        if (PlayerPrefs.GetString("tpUsedDone") == "true")
+        {
+            TPskillCountBtn.interactable = false;
+            TPskillCountImg.color = Color.gray;
+        }
+
+        if (PlayerPrefs.GetString("energyBallUsedSone") == "true")
+        {
+            EnergyBallCountBtn.interactable = false;
+            EnergyBallCountImg.color = Color.gray;
+        }
+
+        if (PlayerPrefs.GetString("fireballCountDone") == "true")
+        {
+            fireballCountBtn.interactable = false;
+            fireballCountImg.color = Color.gray;
+        }
+
+        if (PlayerPrefs.GetString("bossKilledDone") == "true")
+        {
+            bossKillCountBtn.interactable = false;
+            bossKillCountImg.color = Color.gray;
+        }
+
+        if (PlayerPrefs.GetString("deathCountDone") == "true")
+        {
+            deathCountBtn.interactable = false;
+            deathCountImg.color = Color.gray;
+        }
+    }
+
+    public void _mobKilledQuest()
+    {
+        if(PlayerPrefs.GetInt("mobsKilled") >= 50)
+        {
+            PlayerPrefs.SetString("mobKilledDone", "true");
+            reward();
+        }
+    }
+
+    public void coinsCollectedQuest()
+    {
+        if(PlayerPrefs.GetInt("coinsCollected") >= 100)
+        {
+            PlayerPrefs.SetString("coinsCollectedDOne", "true");
+            reward();
+        }
+    }
+
+    public void _potionQuest()
+    {
+        if(PlayerPrefs.GetInt("potionUsed") >= 10)
+        {
+            PlayerPrefs.SetString("potionUsedDone", "true");
+            reward();
+        }
+    }
+
+    public void _tpQuest()
+    {
+        if(PlayerPrefs.GetInt("tpUsed") >= 10)
+        {
+            PlayerPrefs.SetString("tpUsedDone", "true");
+            reward();
+        }
+    }
+
+    public void _energyBallQuest()
+    {
+        if (PlayerPrefs.GetInt("energyBallUsed") >= 10)
+        {
+            PlayerPrefs.SetString("energyBallUsedDone", "true");
+            reward();
+        }
+    }
+
+    public void _fireballQuest()
+    {
+        if(PlayerPrefs.GetInt("fireballCount") >= 100)
+        {
+            PlayerPrefs.SetString("fireballCountDone", "true");
+            reward();
+        }
+    }
+
+    public void _bossKiledQuest()
+    {
+        if(PlayerPrefs.GetInt("bossKilled") >= 5)
+        {
+            PlayerPrefs.SetString("bossKilledDone", "true");
+            reward();
+        }
+    }
+
+    public void _deathsQuest()
+    {
+        if(PlayerPrefs.GetInt("deathCount") >= 5)
+        {
+            PlayerPrefs.SetString("deathCountDone", "true");
+            reward();
+        }
+    }
+
     public void _closeQuest()
     {
         questObj.SetActive(false);
+    }
+
+    private void reward()
+    {
+        PlayerPrefs.Save();
+        print("claimed");
     }
 }

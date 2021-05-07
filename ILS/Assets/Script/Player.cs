@@ -446,6 +446,8 @@ public class Player : MonoBehaviour
         {
             if (isTeleportCD == false)
             {
+                PlayerPrefs.SetInt("tpUsed", PlayerPrefs.GetInt("tpUsed") + 1);
+                PlayerPrefs.Save();
                 isTeleporting = true;
                 StartCoroutine("playerDash");
                 StartCoroutine("skillCDTeleport");
@@ -460,6 +462,8 @@ public class Player : MonoBehaviour
         {
             if (isTornadoCD == false)
             {
+                PlayerPrefs.SetInt("energyBallUsed", PlayerPrefs.GetInt("energyBallUsed") + 1);
+                PlayerPrefs.Save();
                 isTornado = true;
                 StartCoroutine("playerSkill");
                 StartCoroutine("skillCDTornado");
