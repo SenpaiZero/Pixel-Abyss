@@ -63,13 +63,13 @@ public class QuestManager : MonoBehaviour
     private void questCount()
     {
         //mob kill
-        if(PlayerPrefs.GetInt("mobKilled") >= 50)
+        if(PlayerPrefs.GetInt("mobsKilled") >= 50)
         {
             mobKillCount.text = "50 / 50";
         }
         else
         {
-            mobKillCount.text = "" + PlayerPrefs.GetInt("mobKilled") + " / 50";
+            mobKillCount.text = "" + PlayerPrefs.GetInt("mobsKilled") + " / 50";
         }
 
         //coins collected
@@ -144,7 +144,7 @@ public class QuestManager : MonoBehaviour
     }
     private void statCount()
     {
-        mobKillCountStat.text = "" + PlayerPrefs.GetInt("mobKilled");
+        mobKillCountStat.text = "" + PlayerPrefs.GetInt("mobsKilled");
         coinsCollectedStat.text = "" + PlayerPrefs.GetInt("coinsCollected");
         PotionUsedStat.text = "" + PlayerPrefs.GetInt("potionUsed");
         TPskillCountStat.text = "" + PlayerPrefs.GetInt("tpUsed");
@@ -159,55 +159,56 @@ public class QuestManager : MonoBehaviour
         if (PlayerPrefs.GetString("mobKilledDone") == "true")
         {
             mobKillCountBtn.interactable = false;
-            mobKillCountImg.color = Color.gray;
+            mobKillCountImg.color = Color.green;
         }
 
         if (PlayerPrefs.GetString("coinsCollectedDone") == "true")
         {
             coinsCollectedBtn.interactable = false;
-            coinsCollectedImg.color = Color.gray;
+            coinsCollectedImg.color = Color.green;
         }
 
         if (PlayerPrefs.GetString("potionUsedDone") == "true")
         {
             PotionUsedBtn.interactable = false;
-            PotionUsedImg.color = Color.gray;
+            PotionUsedImg.color = Color.green;
         }
 
         if (PlayerPrefs.GetString("tpUsedDone") == "true")
         {
             TPskillCountBtn.interactable = false;
-            TPskillCountImg.color = Color.gray;
+            TPskillCountImg.color = Color.green;
         }
 
-        if (PlayerPrefs.GetString("energyBallUsedSone") == "true")
+        if (PlayerPrefs.GetString("energyBallUsedDone") == "true")
         {
             EnergyBallCountBtn.interactable = false;
-            EnergyBallCountImg.color = Color.gray;
+            EnergyBallCountImg.color = Color.green;
         }
 
         if (PlayerPrefs.GetString("fireballCountDone") == "true")
         {
             fireballCountBtn.interactable = false;
-            fireballCountImg.color = Color.gray;
+            fireballCountImg.color = Color.green;
         }
 
         if (PlayerPrefs.GetString("bossKilledDone") == "true")
         {
             bossKillCountBtn.interactable = false;
-            bossKillCountImg.color = Color.gray;
+            bossKillCountImg.color = Color.green;
         }
 
         if (PlayerPrefs.GetString("deathCountDone") == "true")
         {
             deathCountBtn.interactable = false;
-            deathCountImg.color = Color.gray;
+            deathCountImg.color = Color.green;
         }
     }
 
     public void _mobKilledQuest()
     {
-        if(PlayerPrefs.GetInt("mobsKilled") >= 50)
+        sfxMenu();
+        if (PlayerPrefs.GetInt("mobsKilled") >= 50)
         {
             PlayerPrefs.SetString("mobKilledDone", "true");
             reward();
@@ -216,7 +217,8 @@ public class QuestManager : MonoBehaviour
 
     public void coinsCollectedQuest()
     {
-        if(PlayerPrefs.GetInt("coinsCollected") >= 100)
+        sfxMenu();
+        if (PlayerPrefs.GetInt("coinsCollected") >= 100)
         {
             PlayerPrefs.SetString("coinsCollectedDOne", "true");
             reward();
@@ -225,7 +227,8 @@ public class QuestManager : MonoBehaviour
 
     public void _potionQuest()
     {
-        if(PlayerPrefs.GetInt("potionUsed") >= 10)
+        sfxMenu();
+        if (PlayerPrefs.GetInt("potionUsed") >= 10)
         {
             PlayerPrefs.SetString("potionUsedDone", "true");
             reward();
@@ -234,7 +237,8 @@ public class QuestManager : MonoBehaviour
 
     public void _tpQuest()
     {
-        if(PlayerPrefs.GetInt("tpUsed") >= 10)
+        sfxMenu();
+        if (PlayerPrefs.GetInt("tpUsed") >= 10)
         {
             PlayerPrefs.SetString("tpUsedDone", "true");
             reward();
@@ -243,6 +247,8 @@ public class QuestManager : MonoBehaviour
 
     public void _energyBallQuest()
     {
+        sfxMenu();
+        sfxMenu();
         if (PlayerPrefs.GetInt("energyBallUsed") >= 10)
         {
             PlayerPrefs.SetString("energyBallUsedDone", "true");
@@ -252,7 +258,8 @@ public class QuestManager : MonoBehaviour
 
     public void _fireballQuest()
     {
-        if(PlayerPrefs.GetInt("fireballCount") >= 100)
+        sfxMenu();
+        if (PlayerPrefs.GetInt("fireballCount") >= 100)
         {
             PlayerPrefs.SetString("fireballCountDone", "true");
             reward();
@@ -261,7 +268,8 @@ public class QuestManager : MonoBehaviour
 
     public void _bossKiledQuest()
     {
-        if(PlayerPrefs.GetInt("bossKilled") >= 5)
+        sfxMenu();
+        if (PlayerPrefs.GetInt("bossKilled") >= 5)
         {
             PlayerPrefs.SetString("bossKilledDone", "true");
             reward();
@@ -270,7 +278,8 @@ public class QuestManager : MonoBehaviour
 
     public void _deathsQuest()
     {
-        if(PlayerPrefs.GetInt("deathCount") >= 5)
+        sfxMenu();
+        if (PlayerPrefs.GetInt("deathCount") >= 5)
         {
             PlayerPrefs.SetString("deathCountDone", "true");
             reward();
@@ -280,11 +289,33 @@ public class QuestManager : MonoBehaviour
     public void _closeQuest()
     {
         questObj.SetActive(false);
+        sfxMenu();
     }
 
     private void reward()
     {
+        PlayerPrefs.SetFloat("EXP", PlayerPrefs.GetFloat("EXP") + 100);
+        PlayerPrefs.SetInt("Coins", PlayerPrefs.GetInt("Coins") + 100);
         PlayerPrefs.Save();
+
+        if (PlayerPrefs.GetFloat("EXP") >= PlayerPrefs.GetFloat("ExpToLevelUp"))
+        {
+            //levelup
+            GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().levelUp();
+
+            Debug.Log("LevelUp");
+            PlayerPrefs.SetInt("Level", PlayerPrefs.GetInt("Level") + 1);
+            PlayerPrefs.SetInt("skillPoints", PlayerPrefs.GetInt("skillPoints") + 1);
+            PlayerPrefs.Save();
+            PlayerPrefs.SetFloat("EXP", 0);
+            PlayerPrefs.SetFloat("ExpToLevelUp", PlayerPrefs.GetFloat("ExpToLevelUp") + (PlayerPrefs.GetFloat("ExpToLevelUp") / 7));
+            PlayerPrefs.Save();
+            Debug.Log("Level: " + PlayerPrefs.GetInt("Level"));
+        }
         print("claimed");
+    }
+    void sfxMenu()
+    {
+        GameObject.FindGameObjectWithTag("MenuSfx").GetComponent<menuSFX>().menuSound();
     }
 }

@@ -48,10 +48,13 @@ public class PoisonTrap : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            changeColorEnter();
-            PlayerPrefs.SetFloat("movementSpeed", PlayerPrefs.GetFloat("movementSpeed") / 2);
-            PlayerPrefs.Save();
-            isPoison = true;
+            if (PlayerPrefs.GetString("immuneSlow") != "true")
+            {
+                changeColorEnter();
+                PlayerPrefs.SetFloat("movementSpeed", PlayerPrefs.GetFloat("movementSpeed") / 2);
+                PlayerPrefs.Save();
+                isPoison = true;
+            }
         }
     }
 
@@ -59,10 +62,13 @@ public class PoisonTrap : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            changeColorExit();
-            PlayerPrefs.SetFloat("movementSpeed", saveMovementspeed);
-            PlayerPrefs.Save();
-            isPoison = false;
+            if (PlayerPrefs.GetString("immuneSlow") != "true")
+            {
+                changeColorExit();
+                PlayerPrefs.SetFloat("movementSpeed", saveMovementspeed);
+                PlayerPrefs.Save();
+                isPoison = false;
+            }
         }
     }
 
@@ -71,10 +77,13 @@ public class PoisonTrap : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            isPoison = true;
-            changeColorEnter();
-            PlayerPrefs.SetFloat("movementSpeed", PlayerPrefs.GetFloat("movementSpeed") / 2);
-            PlayerPrefs.Save();
+            if (PlayerPrefs.GetString("immuneSlow") != "true")
+            {
+                isPoison = true;
+                changeColorEnter();
+                PlayerPrefs.SetFloat("movementSpeed", PlayerPrefs.GetFloat("movementSpeed") / 2);
+                PlayerPrefs.Save();
+            }
         }
     }
 
@@ -82,10 +91,13 @@ public class PoisonTrap : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            isPoison = false;
-            changeColorExit();
-            PlayerPrefs.SetFloat("movementSpeed", saveMovementspeed);
-            PlayerPrefs.Save();
+            if (PlayerPrefs.GetString("immuneSlow") != "true")
+            {
+                isPoison = false;
+                changeColorExit();
+                PlayerPrefs.SetFloat("movementSpeed", saveMovementspeed);
+                PlayerPrefs.Save();
+            }
         }
     }
 

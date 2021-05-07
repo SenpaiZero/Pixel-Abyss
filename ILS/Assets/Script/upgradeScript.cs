@@ -88,9 +88,9 @@ public class upgradeScript : MonoBehaviour
         infoArr[8] = "<color=#000000>vitality \n level 10</color> \n Reduces damage taken by 30%";
         infoArr[9] = "<color=#000000>vitality \n level 15</color> \n You have 20% chance blocking an attack";
         //haste
-        infoArr[10] = "<color=#56a811>haste \n level 5</color> \n 20% more movement speed";
+        infoArr[10] = "<color=#56a811>haste \n level 5</color> \n 10% more movement speed";
         infoArr[11] = "<color=#56a811>haste \n level 10</color> \n Gain 20% movement speed after using skill for 2 seconds";
-        infoArr[12] = "<color=#56a811>haste \n level 15</color> \n Immune to all slow effects";
+        infoArr[12] = "<color=#56a811>haste \n level 15</color> \n Immune to all slow and poison effects";
         //greed
         infoArr[13] = "<color=#e6aa1f>greed \n level 5</color> \n You will not lose coins and exp when you died";
         infoArr[14] = "<color=#e6aa1f>greed \n level 10</color> \n Double the exp and coin gain";
@@ -293,7 +293,7 @@ public class upgradeScript : MonoBehaviour
             {
                 sfxMenu();
                 PlayerPrefs.SetFloat("movementSpeed", PlayerPrefs.GetFloat("movementSpeed") + 0.18f); //3% which is 15% max or 2.7f
-                PlayerPrefs.SetFloat("attackSpeed", PlayerPrefs.GetFloat("attackSpeed") - 0.03f);
+                PlayerPrefs.SetFloat("attackSpeed", PlayerPrefs.GetFloat("attackSpeed") - 0.04f);
                 PlayerPrefs.SetInt("attackSpeedCounter", PlayerPrefs.GetInt("attackSpeedCounter") + 6);
                 PlayerPrefs.SetInt("movementSpeedCounter", PlayerPrefs.GetInt("movementSpeedCounter") + 3);
                 PlayerPrefs.SetInt("hasteLevel", PlayerPrefs.GetInt("hasteLevel") + 1);
@@ -303,7 +303,7 @@ public class upgradeScript : MonoBehaviour
                 //lvl5
                 if(PlayerPrefs.GetInt("hasteLevel") >= 5)
                 {
-                    PlayerPrefs.SetFloat("bonusMovement", 1.2f);
+                    PlayerPrefs.SetFloat("bonusMovement", 1.1f);
                 }
 
                 //lvl10
@@ -451,7 +451,7 @@ public class upgradeScript : MonoBehaviour
         //Power Level 5,10,15
         PlayerPrefs.SetInt("critDamage", 2);
         PlayerPrefs.SetFloat("critChanceMul", 1);
-        PlayerPrefs.SetString("doubleshot", "false");
+        PlayerPrefs.SetString("doubleShot", "false");
         PlayerPrefs.SetString("bulletAOE", "false");
 
         //magic level 5,10,15
@@ -473,6 +473,7 @@ public class upgradeScript : MonoBehaviour
         PlayerPrefs.SetString("loseItemOnDead", "true");
         PlayerPrefs.SetInt("doubleDrop", 1);
         PlayerPrefs.SetString("infinitePots", "false");
+        PlayerPrefs.Save();
 
     }
 

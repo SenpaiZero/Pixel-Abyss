@@ -297,7 +297,8 @@ public class Player : MonoBehaviour
             crb.AddForce(aimPos.right * PlayerPrefs.GetFloat("magicSpeed"), ForceMode2D.Impulse);
             crb.velocity = Vector2.ClampMagnitude(crb.velocity, PlayerPrefs.GetFloat("magicSpeed"));
             Destroy(clone, 15f);
-
+            
+            atkTimer -= PlayerPrefs.GetFloat("attackSpeed");
             yield return new WaitForSeconds(0.2f);
             if (PlayerPrefs.GetString("doubleShot") == "true")
             {
@@ -307,9 +308,6 @@ public class Player : MonoBehaviour
                 crb2.velocity = Vector2.ClampMagnitude(crb2.velocity, PlayerPrefs.GetFloat("magicSpeed"));
                 Destroy(clone2, 15f);
             }
-            atkTimer -= PlayerPrefs.GetFloat("attackSpeed");
-
-
             yield return new WaitForSeconds(0.15f);
             isShooting = false;
 
@@ -419,6 +417,8 @@ public class Player : MonoBehaviour
     {
         if (isDead2 == false)
         {
+            PlayerPrefs.SetInt("deathCount", PlayerPrefs.GetInt("deathCount") + 1);
+            PlayerPrefs.Save();
             deadCanvas = GameObject.FindGameObjectWithTag("deadCanvas");
             deadCanvas.GetComponent<Animator>().Play("DeadAnim");
             if (PlayerPrefs.GetString("loseItemOnDead") != "false")

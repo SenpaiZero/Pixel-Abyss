@@ -103,22 +103,23 @@ public class Enemy : MonoBehaviour
 
     void enemyDead()
     {
+        PlayerPrefs.SetInt("mobsKilled", PlayerPrefs.GetInt("mobsKilled") + 1);
+        PlayerPrefs.Save();
         if (isBoss == false)
         {
             getManaPerKill();
             getHealthPerKill();
-            StartCoroutine(speedPerKill());
             GameObject clone = Instantiate(coins, transform.position, Quaternion.identity);
             Destroy(clone, 20f);
             exp();
             enemyList.Remove(this);
-            this.GetComponent<SpriteRenderer>().enabled = false;
-            this.GetComponent<Collider2D>().enabled = false;
-            Destroy(gameObject, 3f);
+            Destroy(gameObject);
 
         }
         else
         {
+            PlayerPrefs.SetInt("bossKilled", PlayerPrefs.GetInt("bossKilled") + 1);
+            PlayerPrefs.Save();
             enemyList.Remove(this);
             Destroy(gameObject);
             exp();

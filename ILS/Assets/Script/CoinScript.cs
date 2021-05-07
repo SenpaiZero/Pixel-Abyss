@@ -16,7 +16,7 @@ public class CoinScript : MonoBehaviour
     {
         if(collision.gameObject.tag == "Player")
         {
-
+            PlayerPrefs.SetInt("coinsCollected", PlayerPrefs.GetInt("coinsCollected") + 1);
             sfx.Play();
             sp.enabled = false;
             cr.enabled = false;

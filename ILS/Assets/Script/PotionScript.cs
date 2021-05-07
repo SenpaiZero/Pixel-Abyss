@@ -28,6 +28,8 @@ public class PotionScript : MonoBehaviour
 
     public void hpPots()
     {
+        PlayerPrefs.SetInt("potionUsed", PlayerPrefs.GetInt("potionUsed") + 1);
+        PlayerPrefs.Save();
         if (PlayerPrefs.GetString("infinitePots") == "false")
         {
             if (isCD_HP == false && PlayerPrefs.GetInt("hpPots") >= 1)
@@ -43,6 +45,8 @@ public class PotionScript : MonoBehaviour
 
     public void mpPots()
     {
+        PlayerPrefs.SetInt("potionUsed", PlayerPrefs.GetInt("potionUsed") + 1);
+        PlayerPrefs.Save();
         if (PlayerPrefs.GetString("infinitePots") == "false")
         {
             if (isCD_MP == false && PlayerPrefs.GetInt("manaPots") >= 1)

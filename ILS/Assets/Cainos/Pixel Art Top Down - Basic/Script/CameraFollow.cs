@@ -11,14 +11,14 @@ namespace Cainos.PixelArtTopDown_Basic
         public float lerpSpeed = 2.5f;
         public bool isWave = false;
 
-        public Vector3 offset;
+        public Vector3 offset = new Vector3(0,0,0);
 
         private Vector3 targetPos;
 
         private void Start()
         {
             if (target == null) return;
-            transform.position = new Vector3(target.position.x, target.position.y, target.position.z - 1);
+            transform.position = new Vector3(target.position.x, target.position.y, target.position.z);
             offset = transform.position - target.position;
         }
 
