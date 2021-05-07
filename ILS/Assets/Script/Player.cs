@@ -287,6 +287,8 @@ public class Player : MonoBehaviour
     {
         if (atkTimer >= PlayerPrefs.GetFloat("attackSpeed"))
         {
+            PlayerPrefs.SetInt("fireballCount", PlayerPrefs.GetInt("fireballCount") + 1);
+            PlayerPrefs.Save();
             isShooting = true;
             shootSFX.Play();
             anim.Play("Attack");
