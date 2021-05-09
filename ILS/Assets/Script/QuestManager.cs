@@ -58,6 +58,7 @@ public class QuestManager : MonoBehaviour
         questCount();
         statCount();
         claimButton();
+        unclaimButton();
     }
 
     private void questCount()
@@ -154,54 +155,105 @@ public class QuestManager : MonoBehaviour
         deathCountStat.text = "" + PlayerPrefs.GetInt("deathCount");
     }
 
+    private void unclaimButton()
+    {
+        if(PlayerPrefs.GetInt("mobsKilled") >= 50)
+        {
+            if (PlayerPrefs.GetString("mobKilledDone") != "true")
+                mobKillCountImg.color = Color.green;
+        }
+
+        if(PlayerPrefs.GetInt("coinsCollected") == 100)
+        {
+            if (PlayerPrefs.GetString("coinsCollectedDone") != "true")
+                coinsCollectedImg.color = Color.green;
+        }
+
+        if(PlayerPrefs.GetInt("potionUsed") >= 10)
+        {
+            if (PlayerPrefs.GetString("potionUsedDone") != "true")
+                PotionUsedImg.color = Color.green;
+        }
+
+        if(PlayerPrefs.GetInt("tpUsed") >= 10)
+        {
+            if (PlayerPrefs.GetString("tpUsedDone") != "true")
+                TPskillCountImg.color = Color.green;
+        }
+
+        if(PlayerPrefs.GetInt("energyBallUsed") >= 10)
+        {
+            if (PlayerPrefs.GetString("energyBallUsedDone") != "true")
+                EnergyBallCountImg.color = Color.green;
+        }
+
+        if(PlayerPrefs.GetInt("fireballCount") >= 100)
+        {
+            if (PlayerPrefs.GetString("fireballCountDone") != "true")
+                fireballCountImg.color = Color.green;
+        }
+
+        if (PlayerPrefs.GetInt("bossKilled") >= 5)
+        {
+            if (PlayerPrefs.GetString("bossKilledDone") != "true")
+                bossKillCountImg.color = Color.green;
+        }
+
+        if(PlayerPrefs.GetInt("deathCount") >= 5)
+        {
+            if (PlayerPrefs.GetString("deathCountDone") != "true")
+                deathCountImg.color = Color.green;
+        }
+    }
+
     private void claimButton()
     {
         if (PlayerPrefs.GetString("mobKilledDone") == "true")
         {
             mobKillCountBtn.interactable = false;
-            mobKillCountImg.color = Color.green;
+            mobKillCountImg.color = Color.red;
         }
 
         if (PlayerPrefs.GetString("coinsCollectedDone") == "true")
         {
             coinsCollectedBtn.interactable = false;
-            coinsCollectedImg.color = Color.green;
+            coinsCollectedImg.color = Color.red;
         }
 
         if (PlayerPrefs.GetString("potionUsedDone") == "true")
         {
             PotionUsedBtn.interactable = false;
-            PotionUsedImg.color = Color.green;
+            PotionUsedImg.color = Color.red;
         }
 
         if (PlayerPrefs.GetString("tpUsedDone") == "true")
         {
             TPskillCountBtn.interactable = false;
-            TPskillCountImg.color = Color.green;
+            TPskillCountImg.color = Color.red;
         }
 
         if (PlayerPrefs.GetString("energyBallUsedDone") == "true")
         {
             EnergyBallCountBtn.interactable = false;
-            EnergyBallCountImg.color = Color.green;
+            EnergyBallCountImg.color = Color.red;
         }
 
         if (PlayerPrefs.GetString("fireballCountDone") == "true")
         {
             fireballCountBtn.interactable = false;
-            fireballCountImg.color = Color.green;
+            fireballCountImg.color = Color.red;
         }
 
         if (PlayerPrefs.GetString("bossKilledDone") == "true")
         {
             bossKillCountBtn.interactable = false;
-            bossKillCountImg.color = Color.green;
+            bossKillCountImg.color = Color.red;
         }
 
         if (PlayerPrefs.GetString("deathCountDone") == "true")
         {
             deathCountBtn.interactable = false;
-            deathCountImg.color = Color.green;
+            deathCountImg.color = Color.red;
         }
     }
 
