@@ -7,8 +7,8 @@ using UnityEngine.SceneManagement;
 
 public class Player : MonoBehaviour
 {
-    [HideInInspector]public int lostCoins;
-    [HideInInspector] public float lostExp;
+    [HideInInspector]public static int lostCoins;
+    [HideInInspector] public static float lostExp;
     [SerializeField]private GameObject endCanvas;
 
     [Header("Skills")]
@@ -23,7 +23,7 @@ public class Player : MonoBehaviour
 
     [Header("Player")]
     private GameObject deadCanvas;
-    [SerializeField] private Animator lvlUpCanvas;
+    [SerializeField] private GameObject lvlUpCanvas;
     [SerializeField] private ParticleSystem footStep;
     [SerializeField] private GameObject textPopup;
     [SerializeField] private Joystick variableJoystick;
@@ -69,6 +69,9 @@ public class Player : MonoBehaviour
     }
     private void Start()
     {
+        lostCoins = 0;
+        lostExp = 0;
+
         var particleEmission = lvlUp.emission;
         particleEmission.enabled = false;
 
@@ -162,16 +165,19 @@ public class Player : MonoBehaviour
         //ENEMY COUNT
         enemyCount = Enemy.enemyList.Count;
         Debug.Log("Enemy Count: " + enemyCount);
-        if (SceneManager.GetActiveScene().name != "Base" && SceneManager.GetActiveScene().name != "TutorialScene")
+        if (SceneManager.GetActiveScene().name != "Base" && SceneManager.GetActiveScene().name != "TutorialScene" && SceneManager.GetActiveScene().name != "Wave")
         {
             if (enemyCount <= 0)
             {
                 if (isAllEnemyDead == false)
                 {
-                    enemyAllDeadFunc();
-                    isAllEnemyDead = true;
-                    endCanvas.SetActive(true);
-                    print("all enemy is dead");
+                    if (PauseController.isPause == false)
+                    {
+                        enemyAllDeadFunc();
+                        isAllEnemyDead = true;
+                        endCanvas.SetActive(true);
+                        print("all enemy is dead");
+                    }
                 }
             }
         }
@@ -520,7 +526,6 @@ public class Player : MonoBehaviour
         particleEmission.enabled = true;
         lvlUp.Play();
         levelUpSFX.Play();
-        lvlUpCanvas.Play("LevelUpCanvas");
 
         yield return new WaitForSeconds(2f);
         particleEmission.enabled = false;

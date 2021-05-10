@@ -324,6 +324,8 @@ MonoBehaviour:
   dmgTextObj: {fileID: 3068462681592775180, guid: f44c846c5fb637d49bbe5e7724dca8ee,
     type: 3}
   textPos: {fileID: 51289735378871415}
+  lvlUpCanvas: {fileID: 6746493099423890835, guid: 350c32daabd2a5a4ebe7bd541caca1fe,
+    type: 3}
   coins: {fileID: 5463114531643536998, guid: 55c99137cdbe61e4792956f637477c1e, type: 3}
 --- !u!114 &51289736613383791
 MonoBehaviour:

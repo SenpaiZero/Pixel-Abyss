@@ -165,10 +165,7 @@ public class upgradeScript : MonoBehaviour
 
         }
 
-        if (isIcon == false)
-        {
-            StartCoroutine("delayIconImage");
-        }
+        delayIconImage();
 
         powerText.text = "" + PlayerPrefs.GetFloat("wandDamage") + " Damage \n" + PlayerPrefs.GetFloat("critChance") + "% CRIT CHANCE";
         magicText.text = "" + PlayerPrefs.GetFloat("mana") + " MANA \n" + PlayerPrefs.GetFloat("manaRegen") + " mana regen \n" + PlayerPrefs.GetFloat("cdr") + "% Cooldown Reduction";
@@ -565,9 +562,8 @@ public class upgradeScript : MonoBehaviour
         sfxMenu();
     }
 
-    IEnumerator delayIconImage()
+    private void delayIconImage()
     {
-        isIcon = true;
         
         //power
         if(PlayerPrefs.GetInt("powerLevel") >= 5)
@@ -695,7 +691,5 @@ public class upgradeScript : MonoBehaviour
             hastelvl15.color = Color.grey;
         }
 
-        yield return new WaitForSeconds(0.1f);
-        isIcon = false;
     }
 }

@@ -8,9 +8,14 @@ public class EnemyBullet : MonoBehaviour
     public bool isDelay = false;
 
     Rigidbody2D rb;
-
+    public bool isStay = false;
     private void Start()
     {
+        if(isStay == true)
+        {
+            Destroy(gameObject, 10f);
+        }
+
         if(isDelay == true)
         {
             rb = GetComponent<Rigidbody2D>();

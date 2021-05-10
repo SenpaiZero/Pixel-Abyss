@@ -30,6 +30,18 @@ public class InteractableScript : MonoBehaviour
     public GameObject caveObj;
     [SerializeField] private Transform cave;
 
+    //Quest
+    [Header("Quest")]
+    public float minDisQuest = 5f;
+    public GameObject questObj;
+    [SerializeField] private Transform quest;
+
+    //Gamemode
+    [Header("Gamemode")]
+    public float minDisGamemode = 5f;
+    public GameObject gamemodeObj;
+    [SerializeField] private Transform gamemode;
+
     //other
     private int countBtn = 0;
     [Space]
@@ -44,6 +56,8 @@ public class InteractableScript : MonoBehaviour
            float marketDist = Vector3.Distance(market.position, player.position);
            float magicDist = Vector3.Distance(magic.position, player.position);
            float caveDist = Vector3.Distance(cave.position, player.position);
+           float questDist = Vector3.Distance(quest.position, player.position);
+           float gamemodeDist = Vector3.Distance(gamemode.position, player.position);
 
             if (marketDist <= minDisMarket)
             {
@@ -62,6 +76,18 @@ public class InteractableScript : MonoBehaviour
                 interactBtn.GetComponent<Image>().color = Color.white;
                 txtInteractable.color = Color.white;
                 countBtn = 3;
+            }
+            else if(questDist <= minDisQuest)
+            {
+                interactBtn.GetComponent<Image>().color = Color.white;
+                txtInteractable.color = Color.white;
+                countBtn = 4;
+            }
+            else if(gamemodeDist <= minDisGamemode)
+            {
+                interactBtn.GetComponent<Image>().color = Color.white;
+                txtInteractable.color = Color.white;
+                countBtn = 5;
             }
             else
             {
@@ -85,7 +111,25 @@ public class InteractableScript : MonoBehaviour
         else if (countBtn == 3)
         {
             showCaveUI();
-        } 
+        }
+        else if (countBtn == 4)
+        {
+            openQuest();
+        }
+        else if (countBtn == 5)
+        {
+            openGamemode();
+        }
+    }
+
+    public void openQuest()
+    {
+        questObj.SetActive(true);
+    }
+
+    public void openGamemode()
+    {
+        gamemodeObj.SetActive(true);
     }
 
     public void showMarketUI()

@@ -18,8 +18,8 @@ public class DeadCanvasScript : MonoBehaviour
 
     private void Update()
     {
-        lostCoins = player.GetComponent<Player>().lostCoins;
-        lostExp = player.GetComponent<Player>().lostExp;
+        lostCoins = Player.lostCoins;
+        lostExp = Player.lostExp;
 
         if (PlayerPrefs.GetString("loseItemOnDead") != "false")
         {

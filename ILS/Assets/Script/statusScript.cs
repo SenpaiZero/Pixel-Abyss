@@ -101,7 +101,7 @@ public class statusScript : MonoBehaviour
     {
         PlayerPrefs.SetFloat("EXP", PlayerPrefs.GetFloat("EXP") + 50);
         PlayerPrefs.Save();
-            sfxMenu();
+         sfxMenu();
 
         if (PlayerPrefs.GetFloat("EXP") >= PlayerPrefs.GetFloat("ExpToLevelUp"))
         {

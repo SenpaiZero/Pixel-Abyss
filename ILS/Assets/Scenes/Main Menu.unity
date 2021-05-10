@@ -98,7 +98,7 @@ LightmapSettings:
     m_TrainingDataDestination: TrainingData
     m_LightProbeSampleCountMultiplier: 4
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -6026,10 +6026,13 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: "HINDI PA PO ITO TAPOS, NEXT QUARTER PO ITUTULOY. \n<color=yellow>upgrade
-    skill tree, stages 6 to 10, quests, and gamemodes and some menu are not done
-    yet.\n<color=purple>Sorry for unpolished game. I didn't expect my plan to be
-    hard and time consuming</color>"
+  m_text: '<color=purple>Survival gamemode, highscores, and stage 6 to 10
+
+    are
+    still work in progress
+
+    <color=red>note: there might be still a few bugs
+    left </color>'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6fdcd96d46144be4b897df43e7494d8c, type: 2}
   m_sharedMaterial: {fileID: 2100000, guid: 708d2dbbe7d6db44ba689cf7200f8147, type: 2}
@@ -6056,7 +6059,7 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 32
+  m_fontSize: 38.1
   m_fontSizeBase: 36
   m_fontWeight: 400
   m_enableAutoSizing: 1
@@ -11431,7 +11434,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1447401051
 RectTransform:
   m_ObjectHideFlags: 0

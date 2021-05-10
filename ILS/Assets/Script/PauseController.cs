@@ -8,6 +8,7 @@ public class PauseController : MonoBehaviour
     public GameObject pauseObj;
     public GameObject settingObj;
     public GameObject firstCanvas;
+    public static bool isPause = false;
 
     GameObject sfx;
     GameObject trans;
@@ -23,7 +24,6 @@ public class PauseController : MonoBehaviour
         sfx.GetComponent<menuSFX>().menuSound();
         firstCanvas.SetActive(false);
         pauseObj.SetActive(true);
-        trans.GetComponent<AudioSource>().pitch = 0.9f;
         Time.timeScale = 0;
     }
 
@@ -32,7 +32,6 @@ public class PauseController : MonoBehaviour
         sfx.GetComponent<menuSFX>().menuSound();
         firstCanvas.SetActive(true);
         pauseObj.SetActive(false);
-        trans.GetComponent<AudioSource>().pitch = 1f;
         Time.timeScale = 1;
     }
 
@@ -40,6 +39,7 @@ public class PauseController : MonoBehaviour
     {
         firstCanvas.SetActive(true);
         sfx.GetComponent<menuSFX>().menuSound();
+        isPause = true;
         if (SceneManager.GetActiveScene().name == "Base")
         {
             resume();
@@ -62,5 +62,10 @@ public class PauseController : MonoBehaviour
     {
         sfx.GetComponent<menuSFX>().menuSound();
         settingObj.SetActive(false);
+    }
+
+    private void OnDestroy()
+    {
+        isPause = false;
     }
 }

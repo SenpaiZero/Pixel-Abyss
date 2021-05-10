@@ -17,6 +17,8 @@ public class Enemy : MonoBehaviour
     [SerializeField] private bool fireTotem = false;
     [SerializeField] private bool flyingMelee = false;
     private Animator hitAnim;
+    private bool isDead = false;
+    private GameObject player;
 
     [Header("boss")]
     public bool isBoss = false;
@@ -29,6 +31,7 @@ public class Enemy : MonoBehaviour
     [Header("etc")]
     public GameObject dmgTextObj;
     public Transform textPos;
+    public GameObject lvlUpCanvas;
     [SerializeField] private GameObject coins;
 
     public static List<Enemy> enemyList = new List<Enemy>();
@@ -46,6 +49,8 @@ public class Enemy : MonoBehaviour
 
     private void Start()
     {
+        player = GameObject.FindGameObjectWithTag("Player");
+
         if (!isBoss)
         {
             hitAnim = GetComponent<Animator>();
@@ -64,6 +69,13 @@ public class Enemy : MonoBehaviour
             bossHPimg.fillAmount = enemyHP / bossMaxHP;
             bossHPtxt.text = "" + enemyHP.ToString("0") + " / " + bossMaxHP;
         }
+
+        if(isDead == true)
+        {
+            Destroy(gameObject);
+            enemyList.Remove(this);
+        }
+
     }
 
 
@@ -114,17 +126,17 @@ public class Enemy : MonoBehaviour
             exp();
             enemyList.Remove(this);
             Destroy(gameObject);
-
         }
         else
         {
             PlayerPrefs.SetInt("bossKilled", PlayerPrefs.GetInt("bossKilled") + 1);
             PlayerPrefs.Save();
             enemyList.Remove(this);
-            Destroy(gameObject);
             exp();
+            Destroy(gameObject);
             //instantiate treasure chest
         }
+        isDead = true;
 
     }
 
@@ -188,14 +200,24 @@ public class Enemy : MonoBehaviour
         else if(isStage5Boss == true)
         {
             getExp(200);
-            PlayerPrefs.Save();
         }
+            PlayerPrefs.Save();
         Debug.Log("Player exp: " + PlayerPrefs.GetFloat("EXP"));
 
-        if(PlayerPrefs.GetFloat("EXP") >= PlayerPrefs.GetFloat("ExpToLevelUp"))
+    }
+
+
+    private void getExp(float exp)
+    {
+        exp = (exp * PlayerPrefs.GetInt("doubleDrop"));
+        PlayerPrefs.SetFloat("EXP", PlayerPrefs.GetFloat("EXP") + (exp * PlayerPrefs.GetFloat("extraEXP")));
+        if (PlayerPrefs.GetFloat("EXP") >= PlayerPrefs.GetFloat("ExpToLevelUp"))
         {
-            GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().levelUp();
             //levelup
+            FindObjectOfType<Player>().levelUp();
+            GameObject clone = Instantiate(lvlUpCanvas, new Vector2(0, 0), Quaternion.identity);
+            Destroy(clone, 5f);
+
             Debug.Log("LevelUp");
             PlayerPrefs.SetInt("Level", PlayerPrefs.GetInt("Level") + 1);
             PlayerPrefs.SetInt("skillPoints", PlayerPrefs.GetInt("skillPoints") + 1);
@@ -205,13 +227,6 @@ public class Enemy : MonoBehaviour
             PlayerPrefs.Save();
             Debug.Log("Level: " + PlayerPrefs.GetInt("Level"));
         }
-    }
-
-    private void getExp(float exp)
-    {
-        exp = (exp * PlayerPrefs.GetInt("doubleDrop"));
-        PlayerPrefs.SetFloat("EXP", PlayerPrefs.GetFloat("EXP") + (exp * PlayerPrefs.GetFloat("extraEXP")));
-        PlayerPrefs.Save();
     }
 
 }

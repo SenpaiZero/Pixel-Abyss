@@ -29,4 +29,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/TutorialScene.unity
     guid: cff6afb1d8bb8fd4fbea4a1bb596c4e7
+  - enabled: 1
+    path: Assets/Scenes/Wave.unity
+    guid: 11d53bb465fd9e541889fc5a61c90533
   m_configObjects: {}

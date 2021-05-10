@@ -88,13 +88,14 @@ public class skeletonEnemy : MonoBehaviour
     IEnumerator attackDelay()
     {
         isAttacking = true;
+        print(player);
         yield return new WaitForSeconds(1f);
 
         anim.Play("skeliLeftAttack");
         sfx.Play();
         if (Dist <= range)
         {
-            player.GetComponent<Player>().playerTakeDamage(damage);
+            FindObjectOfType<Player>().playerTakeDamage(damage);
         }
         Debug.Log("skeliLeftAttack");
 

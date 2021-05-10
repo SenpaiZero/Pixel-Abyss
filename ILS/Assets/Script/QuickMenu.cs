@@ -55,6 +55,12 @@ public class QuickMenu : MonoBehaviour
         market.SetActive(true);
     }
 
+    public void openGamemode()
+    {
+        sfxMenu();
+        gamemode.SetActive(true);
+    }
+
     public void openUpgrade()
     {
         sfxMenu();

@@ -748,9 +748,13 @@ MonoBehaviour:
   flyingMelee: 0
   isBoss: 1
   isStage5Boss: 1
+  bossHPtxt: {fileID: 0}
+  bossHPimg: {fileID: 0}
   dmgTextObj: {fileID: 3068462681592775180, guid: f44c846c5fb637d49bbe5e7724dca8ee,
     type: 3}
   textPos: {fileID: 1089312401024004659}
+  lvlUpCanvas: {fileID: 6746493099423890835, guid: 350c32daabd2a5a4ebe7bd541caca1fe,
+    type: 3}
   coins: {fileID: 0}
 --- !u!82 &1089312400733405588
 AudioSource:
