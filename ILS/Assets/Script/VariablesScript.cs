@@ -129,6 +129,9 @@ public class VariablesScript : MonoBehaviour
             PlayerPrefs.SetInt("doubleDrop", 1);
             PlayerPrefs.SetString("infinitePots", "false");
 
+            //gamemode
+            PlayerPrefs.SetInt("highestWave", 0);
+
             //saving first run
             PlayerPrefs.SetInt("firstRun", firstRun + 5);
             PlayerPrefs.Save();

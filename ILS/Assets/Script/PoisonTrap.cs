@@ -9,13 +9,11 @@ public class PoisonTrap : MonoBehaviour
 
     private float timer = 0;
     private bool isPoison = false;
-    private GameObject player;
     private float saveMovementspeed;
 
     private void Start()
     {
         timer = damageSpeed;
-        player = GameObject.FindGameObjectWithTag("Player");
         saveMovementspeed = PlayerPrefs.GetFloat("movementSpeed");
     }
 
@@ -34,7 +32,7 @@ public class PoisonTrap : MonoBehaviour
             if (timer >= damageSpeed)
             {
                 Debug.Log("Poison Damage: " + poisonDamage);
-                player.GetComponent<Player>().playerTakeDamage(poisonDamage);
+                FindObjectOfType<Player>().GetComponent<Player>().playerTakeDamage(poisonDamage);
                 timer = 0;
             }
         }
@@ -121,10 +119,10 @@ public class PoisonTrap : MonoBehaviour
 
     void changeColorEnter()
     {
-        player.GetComponent<SpriteRenderer>().color = Color.green;
+        FindObjectOfType<Player>().GetComponent<SpriteRenderer>().color = Color.green;
     }
     void changeColorExit()
     {
-        player.GetComponent<SpriteRenderer>().color = Color.white;
+        FindObjectOfType<Player>().GetComponent<SpriteRenderer>().color = Color.white;
     }
 }

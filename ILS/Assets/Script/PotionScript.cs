@@ -67,7 +67,7 @@ public class PotionScript : MonoBehaviour
             isCD_HP = true;
             PlayerPrefs.SetInt("hpPots", PlayerPrefs.GetInt("hpPots") - 1);
             PlayerPrefs.Save();
-            player.GetComponent<Player>().playerRestoreHP(20 * PlayerPrefs.GetFloat("doublePots"));
+            FindObjectOfType<Player>().playerRestoreHP(20 * PlayerPrefs.GetFloat("doublePots"));
             hpImg.color = Color.black;
             yield return new WaitForSeconds(2f);
             hpImg.color = Color.white;
@@ -76,7 +76,7 @@ public class PotionScript : MonoBehaviour
         else
         {
             isCD_HP = true;
-            player.GetComponent<Player>().playerRestoreHP(20 * PlayerPrefs.GetFloat("doublePots"));
+            FindObjectOfType<Player>().playerRestoreHP(20 * PlayerPrefs.GetFloat("doublePots"));
             hpImg.color = Color.black;
             yield return new WaitForSeconds(6f);
             hpImg.color = Color.white;
@@ -91,7 +91,7 @@ public class PotionScript : MonoBehaviour
             isCD_MP = true;
             PlayerPrefs.SetInt("manaPots", PlayerPrefs.GetInt("manaPots") - 1);
             PlayerPrefs.Save();
-            player.GetComponent<Player>().playerRestoreMana(20 * PlayerPrefs.GetFloat("doublePots"));
+            FindObjectOfType<Player>().playerRestoreMana(20 * PlayerPrefs.GetFloat("doublePots"));
             mpImg.color = Color.black;
             yield return new WaitForSeconds(2f);
             mpImg.color = Color.white;
@@ -100,7 +100,7 @@ public class PotionScript : MonoBehaviour
         else
         {
             isCD_MP = true;
-            player.GetComponent<Player>().playerRestoreMana(20 * PlayerPrefs.GetFloat("doublePots"));
+            FindObjectOfType<Player>().playerRestoreMana(20 * PlayerPrefs.GetFloat("doublePots"));
             mpImg.color = Color.black;
             yield return new WaitForSeconds(6f);
             mpImg.color = Color.white;

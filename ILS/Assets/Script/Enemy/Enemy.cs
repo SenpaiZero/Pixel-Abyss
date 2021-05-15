@@ -144,7 +144,7 @@ public class Enemy : MonoBehaviour
     {
         if(PlayerPrefs.GetString("manaPerKill") == "true")
         {
-            GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().playerRestoreMana(5);
+            FindObjectOfType<Player>().GetComponent<Player>().playerRestoreMana(5);
         }
     }
 
@@ -152,7 +152,8 @@ public class Enemy : MonoBehaviour
     {
         if(PlayerPrefs.GetString("HPperKill") == "true")
         {
-            GameObject.FindGameObjectWithTag("Player").GetComponent<Player>().playerRestoreHP(5);
+
+            FindObjectOfType<Player>().GetComponent<Player>().playerRestoreHP(5);
         }
     }
 

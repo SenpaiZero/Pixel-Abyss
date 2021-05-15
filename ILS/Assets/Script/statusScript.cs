@@ -89,7 +89,7 @@ public class statusScript : MonoBehaviour
 
         //exp
         expFill.fillAmount = currentExp / MaxExp;
-        expText.text = "" + currentExp + " / " + MaxExp;
+        expText.text = "" + currentExp + " / " + MaxExp.ToString("0");
         levelCount.text = "" + PlayerPrefs.GetInt("Level");
 
         //Coins

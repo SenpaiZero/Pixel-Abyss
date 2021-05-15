@@ -44,7 +44,13 @@ public class waveManager : MonoBehaviour
         yield return new WaitForSeconds(2f);
         //wait 2s before spawning new mobs
         spawnMobs();
+        if(PlayerPrefs.GetInt("highestWave") < waveCount)
+        {
+            PlayerPrefs.SetInt("highestWave", waveCount);
+            PlayerPrefs.Save();
+        }
         isNextWave = false;
+
     }
 
     private void spawnMobs()
