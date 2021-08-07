@@ -13,7 +13,7 @@
     This is my second repository for this project. I accidentaly deleted my first repository
     <br />
     <br />
-    <a href="https://github.com/SenpaiZero/Pixel-Abyss">View Demo</a>
+    <a href="https://www.youtube.com/watch?v=8AuFV3JXPhM&t">View Gameplay</a>
     ·
     <a href="https://github.com/SenpaiZero/Pixel-Abyss/issues">Report Bug</a>
     ·
